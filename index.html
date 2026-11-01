@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LoanHub — Personal loans from 5.99% APR</title>
+<meta name="description" content="Borrow $2,000 to $100,000 with fixed rates from 5.99% APR. Check your rate in two minutes with no impact to your credit score, then manage your loan online." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300a94f'/%3E%3Cpath d='M18 44V20h7l14 15V20h7v24h-7L25 29v15z' fill='white'/%3E%3C/svg%3E" />
+<meta name="theme-color" content="#00a94f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ==========================================================================
+   LoanHub — a complete loan origination experience
+   Single-file build source: style.css
+   ========================================================================== */
+
+:root {
+  --green: #00a94f;
+  --green-dark: #00873c;
+  --green-deep: #06301b;
+  --lime: #8dc63f;
+  --ink: #10231a;
+  --body: #333d36;
+  --muted: #5f6b63;
+  --subtle: #8b968e;
+  --line: #e2e8e0;
+  --line-strong: #cfd8cc;
+  --bg: #ffffff;
+  --bg-alt: #f6f9f4;
+  --bg-soft: #eef4ea;
+  --link: #0069aa;
+  --danger: #b3352a;
+  --amber: #b26a00;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(10, 30, 18, .06);
+  --shadow: 0 4px 16px -6px rgba(10, 30, 18, .16);
+  --shadow-lg: 0 24px 60px -28px rgba(10, 30, 18, .38);
+  --maxw: 1180px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--body);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { max-width: 100%; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3, h4 { color: var(--ink); line-height: 1.18; font-weight: 800; margin: 0 0 .5em; letter-spacing: -.02em; }
+h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+h3 { font-size: 1.2rem; letter-spacing: -.01em; }
+p { margin: 0 0 1em; }
+ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
+li { margin-bottom: .4em; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+:focus-visible { outline: 3px solid rgba(0, 169, 79, .45); outline-offset: 2px; }
+
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.narrow { max-width: 860px; margin: 0 auto; }
+.center { text-align: center; }
+.muted { color: var(--muted); }
+.small { font-size: .84rem; }
+.tiny { font-size: .76rem; }
+.nowrap { white-space: nowrap; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ------------------------------- Buttons -------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 22px; border-radius: 10px; border: 1.5px solid transparent;
+  font-size: .95rem; font-weight: 700; letter-spacing: .01em; text-decoration: none;
+  transition: background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .06s ease, color .16s ease;
+  white-space: nowrap;
+}
+.btn:hover { text-decoration: none; }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-dark); box-shadow: 0 10px 24px -10px rgba(0, 135, 60, .7); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; }
+.btn-ghost { background: #fff; color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { border-color: var(--green); color: var(--green-dark); background: #fbfdf9; }
+.btn-light { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.34); backdrop-filter: blur(6px); }
+.btn-light:hover { background: rgba(255,255,255,.24); }
+.btn-block { width: 100%; }
+.btn-sm { height: 40px; padding: 0 16px; font-size: .87rem; border-radius: 8px; }
+.btn-lg { height: 54px; padding: 0 28px; font-size: 1rem; }
+.btn[disabled] { opacity: .55; cursor: not-allowed; box-shadow: none; }
+.btn .spin {
+  width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff;
+  border-radius: 50%; animation: spin .7s linear infinite; display: none;
+}
+.btn.loading .spin { display: inline-block; }
+.btn.loading .lbl { opacity: .8; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.link-arrow { font-weight: 700; color: var(--green-dark); display: inline-flex; align-items: center; gap: 6px; }
+.link-arrow:hover { gap: 10px; transition: gap .18s ease; }
+
+/* -------------------------------- Header -------------------------------- */
+.site-header {
+  position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.94);
+  backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; gap: 26px; height: 68px; }
+.brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1.18rem; color: var(--ink); letter-spacing: -.03em; }
+.brand:hover { text-decoration: none; }
+.brand-mark {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--green), var(--lime)); color: #fff;
+  font-size: .95rem; font-weight: 900; letter-spacing: -.04em; flex: none;
+}
+.brand-mark svg { width: 17px; height: 17px; }
+.main-nav { display: flex; align-items: center; gap: 4px; margin-left: 6px; }
+.main-nav a {
+  padding: 9px 12px; border-radius: 8px; font-size: .9rem; font-weight: 600; color: #35423a;
+}
+.main-nav a:hover { background: var(--bg-soft); text-decoration: none; color: var(--green-dark); }
+.main-nav a.active { color: var(--green-dark); background: var(--bg-soft); }
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.header-phone { font-size: .86rem; font-weight: 700; color: var(--ink); display: inline-flex; align-items: center; gap: 7px; }
+.header-phone svg { width: 15px; height: 15px; color: var(--green); }
+.nav-toggle { display: none; width: 42px; height: 42px; border-radius: 9px; border: 1px solid var(--line-strong); background: #fff; align-items: center; justify-content: center; }
+.nav-toggle svg { width: 20px; height: 20px; }
+
+.mobile-nav {
+  display: none; position: fixed; inset: 68px 0 auto 0; background: #fff; border-bottom: 1px solid var(--line);
+  padding: 14px 20px 22px; z-index: 39; box-shadow: var(--shadow);
+}
+.mobile-nav.open { display: block; }
+.mobile-nav a { display: block; padding: 12px 4px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); }
+.mobile-nav a:last-of-type { border-bottom: 0; }
+.mobile-nav .btn { margin-top: 14px; }
+
+/* --------------------------------- Hero --------------------------------- */
+.hero {
+  position: relative; overflow: hidden; color: #fff;
+  background:
+    radial-gradient(900px 460px at 82% -12%, rgba(141, 198, 63, .34), transparent 62%),
+    radial-gradient(700px 420px at 4% 110%, rgba(0, 169, 79, .3), transparent 60%),
+    linear-gradient(140deg, #052414 0%, #0a3a20 46%, #0e4a28 100%);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 22px 22px; opacity: .5;
+}
+.hero-grid {
+  position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr;
+  gap: 48px; align-items: center; padding: 64px 0 72px;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px 6px 9px;
+  border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  font-size: .78rem; font-weight: 700; letter-spacing: .02em; margin-bottom: 20px; color: #eaf7e3;
+}
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(141,198,63,.24); }
+.hero h1 { color: #fff; margin-bottom: 16px; }
+.hero h1 .hl { color: var(--lime); }
+.hero-sub { font-size: 1.06rem; color: rgba(255,255,255,.82); max-width: 520px; margin-bottom: 26px; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 30px; }
+.hero-fact { display: flex; align-items: flex-start; gap: 9px; font-size: .88rem; color: rgba(255,255,255,.9); }
+.hero-fact svg { width: 17px; height: 17px; color: var(--lime); flex: none; margin-top: 2px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero-note { font-size: .78rem; color: rgba(255,255,255,.62); margin-top: 14px; }
+
+/* Rate-check card */
+.ratecard {
+  background: #fff; border-radius: 18px; padding: 26px; color: var(--body);
+  box-shadow: 0 30px 70px -30px rgba(0,0,0,.6), 0 2px 0 rgba(255,255,255,.5) inset;
+  border: 1px solid rgba(255,255,255,.6);
+}
+.ratecard h2 { font-size: 1.18rem; margin-bottom: 4px; }
+.ratecard .rc-sub { font-size: .84rem; color: var(--muted); margin-bottom: 18px; }
+.rc-badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--green-dark);
+  background: var(--bg-soft); padding: 4px 9px; border-radius: 6px; margin-bottom: 12px;
+}
+.field { margin-bottom: 14px; }
+.field > label, .field-label {
+  display: block; font-size: .8rem; font-weight: 700; color: #2b3a30; margin-bottom: 6px; letter-spacing: .01em;
+}
+.input, select.input {
+  width: 100%; height: 46px; padding: 0 13px; border: 1.5px solid #d7ded4; border-radius: 9px;
+  font-size: .93rem; color: var(--ink); background: #fff; transition: border-color .15s, box-shadow .15s;
+  appearance: none;
+}
+select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f6b63' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 38px;
+}
+.input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 4px rgba(0,169,79,.14); }
+.input::placeholder { color: #9aa79d; }
+.input-wrap { position: relative; display: flex; align-items: center; }
+.input-wrap .prefix, .input-wrap .suffix {
+  position: absolute; font-size: .9rem; font-weight: 700; color: var(--muted); pointer-events: none;
+}
+.input-wrap .prefix { left: 13px; }
+.input-wrap .suffix { right: 13px; }
+.input-wrap.has-prefix .input { padding-left: 27px; }
+.input-wrap.has-suffix .input { padding-right: 44px; }
+.field.error .input { border-color: var(--danger); box-shadow: 0 0 0 4px rgba(179,53,42,.1); }
+.err {
+  display: none; align-items: center; gap: 5px; margin-top: 6px; font-size: .78rem; font-weight: 600; color: var(--danger);
+}
+.field.error .err { display: flex; }
+.err svg { width: 13px; height: 13px; flex: none; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* -------------------------------- Sections ------------------------------- */
+.section { padding: 68px 0; }
+.section.tight { padding: 48px 0; }
+.section.alt { background: var(--bg-alt); }
+.section.dark { background: var(--ink); color: rgba(255,255,255,.78); }
+.section.dark h2, .section.dark h3 { color: #fff; }
+.section-head { max-width: 700px; margin-bottom: 34px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-head p { color: var(--muted); font-size: 1rem; margin-bottom: 0; }
+.kicker {
+  font-size: .76rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--green-dark); margin-bottom: 10px; display: block;
+}
+
+/* Product grid */
+.prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.prod {
+  display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 24px; transition: transform .18s, box-shadow .18s, border-color .18s;
+  color: inherit; text-decoration: none;
+}
+.prod:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #cfe3c4; text-decoration: none; }
+.prod-ico {
+  width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--bg-soft); color: var(--green-dark); margin-bottom: 15px;
+}
+.prod-ico svg { width: 23px; height: 23px; }
+.prod h3 { font-size: 1.06rem; margin-bottom: 6px; }
+.prod p { font-size: .88rem; color: var(--muted); margin-bottom: 14px; }
+.prod .prod-rate { font-size: .8rem; font-weight: 700; color: var(--green-dark); margin-top: auto; }
+.prod .prod-rate span { color: var(--muted); font-weight: 600; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: s; }
+.step-card { position: relative; padding: 26px 22px 22px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.step-num {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #fff;
+  display: grid; place-items: center; font-weight: 800; font-size: .92rem; margin-bottom: 14px;
+}
+.step-card h3 { font-size: 1.02rem; }
+.step-card p { font-size: .88rem; color: var(--muted); margin: 0; }
+
+/* Stats band */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.stat { padding: 22px; border-left: 3px solid var(--green); background: rgba(255,255,255,.05); border-radius: 0 10px 10px 0; }
+.stat .num { font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -.03em; }
+.stat .num span { color: var(--lime); }
+.stat .lbl { font-size: .84rem; color: rgba(255,255,255,.66); margin-top: 8px; }
+
+/* Testimonials */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.quote { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; }
+.stars { color: var(--green); letter-spacing: 2px; font-size: .95rem; margin-bottom: 12px; }
+.quote p { font-size: .92rem; color: #37443b; flex: 1; }
+.quote .who { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.quote .av {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 800;
+  font-size: .82rem; color: #fff; background: linear-gradient(135deg, var(--green), var(--lime)); flex: none;
+}
+.quote .who b { display: block; font-size: .87rem; color: var(--ink); }
+.quote .who span { font-size: .76rem; color: var(--subtle); }
+
+/* FAQ */
+.faq { max-width: 820px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%; background: none; border: 0; text-align: left; padding: 20px 0; display: flex;
+  justify-content: space-between; align-items: center; gap: 16px; font-size: 1rem; font-weight: 700;
+  color: var(--ink); font-family: inherit;
+}
+.faq-q:hover { color: var(--green-dark); }
+.faq-q .plus { font-size: 1.35rem; color: var(--green-dark); transition: transform .2s; flex: none; line-height: 1; }
+.faq-q[aria-expanded="true"] .plus { transform: rotate(45deg); }
+.faq-a { display: none; padding: 0 0 20px; font-size: .94rem; color: var(--muted); max-width: 92%; }
+.faq-a.open { display: block; }
+
+/* ------------------------------- Calculator ------------------------------ */
+.calc { display: grid; grid-template-columns: 1.05fr .95fr; gap: 26px; align-items: start; }
+.calc-panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-sm); }
+.calc-result {
+  background: linear-gradient(160deg, #072a17, #0d4526); color: #fff; border-radius: var(--radius-lg);
+  padding: 28px; position: sticky; top: 88px;
+}
+.calc-result .pay-label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.62); font-weight: 700; }
+.calc-result .pay { font-size: 2.9rem; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin: 6px 0 2px; }
+.calc-result .pay small { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.6); }
+.calc-rows { margin-top: 20px; border-top: 1px solid rgba(255,255,255,.14); padding-top: 16px; display: grid; gap: 11px; }
+.calc-row { display: flex; justify-content: space-between; font-size: .88rem; color: rgba(255,255,255,.74); gap: 12px; }
+.calc-row b { color: #fff; font-weight: 700; }
+.bar { height: 9px; border-radius: 999px; background: rgba(255,255,255,.16); display: flex; overflow: hidden; margin-top: 18px; }
+.bar i { display: block; height: 100%; }
+.bar .b1 { background: var(--lime); }
+.bar .b2 { background: rgba(255,255,255,.42); }
+.legend { display: flex; gap: 16px; margin-top: 10px; font-size: .76rem; color: rgba(255,255,255,.66); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+.slider-row { margin-bottom: 22px; }
+.slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.slider-head label { font-size: .84rem; font-weight: 700; color: #2b3a30; }
+.slider-head output { font-size: 1.02rem; font-weight: 800; color: var(--ink); }
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+  background: #e3e9e0; outline: none; margin: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff;
+  border: 3px solid var(--green); box-shadow: 0 2px 6px rgba(0,0,0,.2); cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--green);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2); cursor: pointer;
+}
+.range-scale { display: flex; justify-content: space-between; font-size: .72rem; color: var(--subtle); margin-top: 6px; }
+
+/* -------------------------------- Tables -------------------------------- */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-lg); background: #fff; -webkit-overflow-scrolling: touch; }
+table.data { width: 100%; border-collapse: collapse; min-width: 700px; font-size: .9rem; }
+table.data thead th {
+  text-align: left; padding: 14px 18px; font-size: .72rem; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--muted); background: var(--bg-alt); border-bottom: 1px solid var(--line); font-weight: 800; white-space: nowrap;
+}
+table.data td { padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+table.data tbody tr:last-child td { border-bottom: 0; }
+table.data tbody tr:hover { background: #fbfdf9; }
+table.data .strong { font-weight: 700; color: var(--ink); }
+.apr { font-weight: 800; color: var(--green-dark); white-space: nowrap; }
+.apr small { display: block; font-weight: 600; color: var(--muted); font-size: .74rem; }
+
+/* -------------------------------- Apply --------------------------------- */
+.apply-shell { background: var(--bg-alt); min-height: calc(100vh - 68px); padding: 40px 0 70px; }
+.apply-head { max-width: 780px; margin: 0 auto 26px; text-align: center; }
+.apply-head h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.apply-head p { color: var(--muted); }
+
+.progress { display: flex; align-items: center; gap: 0; max-width: 720px; margin: 0 auto 26px; }
+.progress .p-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
+.progress .p-step::before {
+  content: ""; position: absolute; top: 15px; left: -50%; width: 100%; height: 2px; background: var(--line-strong); z-index: 0;
+}
+.progress .p-step:first-child::before { display: none; }
+.progress .p-step.done::before, .progress .p-step.active::before { background: var(--green); }
+.progress .p-dot {
+  width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 2px solid var(--line-strong);
+  display: grid; place-items: center; font-size: .82rem; font-weight: 800; color: var(--subtle); z-index: 1;
+  transition: all .2s ease;
+}
+.progress .p-step.active .p-dot { border-color: var(--green); background: var(--green); color: #fff; box-shadow: 0 0 0 5px rgba(0,169,79,.15); }
+.progress .p-step.done .p-dot { border-color: var(--green); background: #fff; color: var(--green); }
+.progress .p-label { font-size: .74rem; font-weight: 700; color: var(--subtle); text-align: center; }
+.progress .p-step.active .p-label, .progress .p-step.done .p-label { color: var(--green-dark); }
+
+.apply-card {
+  max-width: 720px; margin: 0 auto; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow);
+}
+.apply-card h2 { font-size: 1.35rem; margin-bottom: 6px; }
+.apply-card .step-sub { color: var(--muted); font-size: .9rem; margin-bottom: 24px; }
+.apply-step { display: none; }
+.apply-step.active { display: block; animation: fadein .25s ease both; }
+@keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.opt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.opt {
+  display: flex; flex-direction: column; gap: 6px; padding: 14px 12px; border: 1.5px solid var(--line-strong);
+  border-radius: 10px; background: #fff; text-align: left; font-size: .86rem; font-weight: 600; color: #35423a;
+  transition: border-color .15s, background .15s, box-shadow .15s;
+}
+.opt:hover { border-color: #b6d3a8; background: #fbfdf9; }
+.opt svg { width: 20px; height: 20px; color: var(--green-dark); }
+.opt.selected { border-color: var(--green); background: var(--bg-soft); box-shadow: 0 0 0 3px rgba(0,169,79,.12); color: var(--green-dark); }
+
+.amount-display { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.amount-display .cur { font-size: 1.3rem; font-weight: 700; color: var(--muted); }
+.amount-display input {
+  border: 0; font-size: 2.4rem; font-weight: 800; color: var(--ink); width: 100%; padding: 0;
+  letter-spacing: -.03em; background: transparent;
+}
+.amount-display input:focus { outline: none; }
+.amount-display input::-webkit-outer-spin-button, .amount-display input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line-strong); background: #fff;
+  font-size: .84rem; font-weight: 700; color: #35423a; transition: all .15s;
+}
+.chip:hover { border-color: #b6d3a8; }
+.chip.selected { background: var(--green); border-color: var(--green); color: #fff; }
+
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .86rem; color: #3c4a41; margin-bottom: 12px; }
+.check input { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--green); flex: none; }
+.check a { color: var(--link); }
+
+.apply-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.apply-nav .btn { min-width: 130px; }
+
+.summary-box { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-bottom: 18px; }
+.summary-row { display: flex; justify-content: space-between; gap: 14px; font-size: .88rem; padding: 7px 0; color: var(--muted); }
+.summary-row b { color: var(--ink); }
+.summary-row.total { border-top: 1px dashed var(--line-strong); margin-top: 6px; padding-top: 12px; font-size: .95rem; }
+.summary-row.total b { color: var(--green-dark); font-size: 1.05rem; }
+
+/* Offer screen */
+.offer { max-width: 760px; margin: 0 auto; }
+.offer-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
+}
+.offer-top { background: linear-gradient(150deg, #072a17, #0d4526); color: #fff; padding: 30px 32px; }
+.offer-top .ok {
+  display: inline-flex; align-items: center; gap: 7px; font-size: .76rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em; color: #d7f2c6; background: rgba(141,198,63,.18);
+  border: 1px solid rgba(141,198,63,.4); padding: 5px 11px; border-radius: 999px; margin-bottom: 14px;
+}
+.offer-top h2 { color: #fff; font-size: 1.5rem; margin-bottom: 6px; }
+.offer-top p { color: rgba(255,255,255,.72); font-size: .9rem; margin: 0; }
+.offer-body { padding: 28px 32px 30px; }
+.offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+.offer-cell { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.offer-cell .k { font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 800; }
+.offer-cell .v { font-size: 1.42rem; font-weight: 800; color: var(--ink); letter-spacing: -.02em; margin-top: 4px; }
+.offer-cell .v small { font-size: .78rem; font-weight: 600; color: var(--muted); }
+.offer-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.offer-actions .btn { flex: 1; min-width: 180px; }
+.offer-fine { font-size: .74rem; color: var(--subtle); margin-top: 16px; line-height: 1.5; }
+
+/* ------------------------------ Dashboard ------------------------------- */
+.dash-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
+.dash-head h1 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 4px; }
+.dash-head p { color: var(--muted); margin: 0; }
+.dash-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 20px; align-items: start; }
+
+.loan-card {
+  background: linear-gradient(155deg, #06251a, #0c4224 62%, #10512c); color: #fff;
+  border-radius: var(--radius-lg); padding: 28px; position: relative; overflow: hidden;
+}
+.loan-card::after {
+  content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  right: -120px; top: -140px; background: radial-gradient(circle, rgba(141,198,63,.3), transparent 68%);
+}
+.loan-card .lc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; position: relative; z-index: 1; }
+.loan-card .lc-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: rgba(255,255,255,.6); font-weight: 800; }
+.loan-card .lc-balance { font-size: 2.5rem; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-top: 4px; }
+.loan-card .lc-balance small { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.55); }
+.loan-card .status-pill {
+  font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  background: rgba(141,198,63,.2); border: 1px solid rgba(141,198,63,.45); color: #d9f3c9;
+  padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+}
+.loan-card .lc-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; position: relative; z-index: 1; }
+.loan-card .lc-meta .k { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.55); font-weight: 800; }
+.loan-card .lc-meta .v { font-size: 1.05rem; font-weight: 800; color: #fff; margin-top: 3px; }
+.lc-progress { margin-top: 22px; position: relative; z-index: 1; }
+.lc-progress .track { height: 8px; border-radius: 999px; background: rgba(255,255,255,.16); overflow: hidden; }
+.lc-progress .track i { display: block; height: 100%; background: linear-gradient(90deg, var(--lime), #b8e07a); border-radius: 999px; transition: width .5s ease; }
+.lc-progress .cap { display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.62); margin-top: 8px; }
+
+.panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; }
+.panel h3 { font-size: 1.05rem; margin-bottom: 14px; }
+.pay-now { display: grid; gap: 12px; }
+.pay-now .amount-display input { font-size: 1.9rem; }
+.history { list-style: none; margin: 0; padding: 0; }
+.history li { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: .87rem; }
+.history li:last-child { border-bottom: 0; }
+.history .h-date { color: var(--muted); }
+.history .h-amt { font-weight: 700; color: var(--green-dark); }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+.empty-state svg { width: 44px; height: 44px; color: var(--line-strong); margin-bottom: 12px; }
+
+.sched-toggle { margin-top: 16px; }
+.schedule { display: none; margin-top: 14px; }
+.schedule.open { display: block; }
+
+/* -------------------------------- Login --------------------------------- */
+.auth-wrap { min-height: calc(100vh - 68px); display: grid; place-items: center; padding: 44px 24px 64px; background:
+  radial-gradient(800px 420px at 10% -10%, #e9f4e2, transparent 60%),
+  radial-gradient(700px 400px at 100% 0%, #eaf2fb, transparent 55%), var(--bg-alt); }
+.auth-card {
+  width: 100%; max-width: 420px; background: #fff; border: 1px solid var(--line);
+  border-radius: 18px; padding: 34px 32px 28px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+}
+.auth-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--green), var(--lime)); }
+.auth-card h1 { font-size: 1.5rem; text-align: center; margin-bottom: 6px; }
+.auth-card .auth-sub { text-align: center; color: var(--muted); font-size: .9rem; margin-bottom: 22px; }
+.auth-step { display: none; }
+.auth-step.active { display: block; animation: fadein .25s ease both; }
+.auth-alt { text-align: center; font-size: .86rem; color: var(--muted); margin-top: 16px; }
+.auth-alt a { font-weight: 700; color: var(--green-dark); }
+.divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; color: var(--subtle); font-size: .76rem; font-weight: 700; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.identity { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); background: var(--bg-alt); border-radius: 10px; margin-bottom: 16px; font-size: .86rem; }
+.identity .av { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--lime)); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: .78rem; flex: none; }
+.identity .who { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: var(--ink); }
+.identity button { border: 0; background: none; color: var(--link); font-weight: 700; font-size: .8rem; padding: 4px 6px; border-radius: 6px; }
+.identity button:hover { background: #e9f1f7; }
+
+/* -------------------------------- Footer -------------------------------- */
+.site-footer { background: #0a1c12; color: rgba(255,255,255,.66); padding: 52px 0 26px; font-size: .88rem; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; margin-bottom: 36px; }
+.site-footer .brand { color: #fff; margin-bottom: 12px; }
+.site-footer h4 { color: #fff; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+.site-footer a { color: rgba(255,255,255,.66); display: block; padding: 5px 0; }
+.site-footer a:hover { color: #fff; text-decoration: none; }
+.footer-note { border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; font-size: .74rem; color: rgba(255,255,255,.42); line-height: 1.6; }
+.footer-note p { margin-bottom: .7em; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 18px; font-size: .74rem; color: rgba(255,255,255,.42); }
+
+/* -------------------------------- Toast --------------------------------- */
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 18px);
+  background: #0c2a18; color: #fff; font-size: .87rem; font-weight: 600; padding: 13px 20px;
+  border-radius: 10px; box-shadow: 0 18px 44px -18px rgba(0,0,0,.7); opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s; z-index: 90; max-width: calc(100vw - 40px); text-align: center;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.ok { background: #0b3d21; border-left: 3px solid var(--lime); }
+.toast.warn { background: #4a2c05; border-left: 3px solid #f0a93a; }
+
+/* ------------------------------- Modal ---------------------------------- */
+.modal-back {
+  position: fixed; inset: 0; background: rgba(6, 22, 13, .55); backdrop-filter: blur(3px);
+  display: none; align-items: center; justify-content: center; padding: 20px; z-index: 80;
+}
+.modal-back.open { display: flex; }
+.modal { background: #fff; border-radius: 16px; padding: 28px; max-width: 440px; width: 100%; box-shadow: var(--shadow-lg); }
+.modal h3 { margin-bottom: 6px; }
+.modal p { color: var(--muted); font-size: .9rem; }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.modal-actions .btn { flex: 1; }
+
+/* ------------------------------ Responsive ------------------------------ */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; padding: 48px 0 56px; }
+  .hero-sub { max-width: 640px; }
+  .prod-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .quotes { grid-template-columns: 1fr; }
+  .calc { grid-template-columns: 1fr; }
+  .calc-result { position: static; }
+  .dash-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .main-nav { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .header-phone { display: none; }
+}
+
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; }
+  .offer-grid { grid-template-columns: 1fr; }
+  .opt-grid { grid-template-columns: repeat(2, 1fr); }
+  .apply-card { padding: 24px 20px; }
+  .section { padding: 52px 0; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 18px; }
+  .header-inner { height: 62px; gap: 10px; }
+  .header-phone { display: none; }
+  .header-actions { gap: 8px; }
+  .header-actions .btn { padding: 9px 12px; font-size: .8rem; }
+  #headerAuth { display: none; }
+  .mobile-nav { inset: 62px 0 auto 0; }
+  .hero-grid { padding: 36px 0 44px; }
+  .hero-facts { gap: 8px 18px; }
+  .hero-cta .btn { width: 100%; }
+  .ratecard { padding: 20px; }
+  .prod-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat { padding: 16px; }
+  .stat .num { font-size: 1.5rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .opt-grid { grid-template-columns: 1fr 1fr; }
+  .progress .p-label { display: none; }
+  .apply-shell { padding: 26px 0 50px; }
+  .offer-body { padding: 22px 20px 24px; }
+  .offer-top { padding: 24px 20px; }
+  .loan-card { padding: 22px; }
+  .loan-card .lc-balance { font-size: 2rem; }
+  .loan-card .lc-meta { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .dash-head { align-items: flex-start; }
+  .apply-nav { flex-direction: column-reverse; }
+  .apply-nav .btn { width: 100%; }
+  .modal-actions { flex-direction: column; }
+}
+
+@media print {
+  .site-header, .site-footer, .mobile-nav, .hero-cta, .toast, .modal-back, .apply-nav { display: none !important; }
+  body { color: #000; }
+  .hero, .loan-card, .calc-result, .offer-top { background: #f2f2f2 !important; color: #000 !important; }
+  .section { padding: 20px 0; }
+  a { color: #000; text-decoration: underline; }
+}
+
+/* ============================ DEMO ASSISTANT ============================ */
+.chat { position: fixed; right: 22px; bottom: 22px; z-index: 60; font-family: inherit; }
+.chat-fab {
+  position: relative; width: 58px; height: 58px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 28px rgba(0, 128, 60, .32); transition: transform .18s ease, background .18s ease;
+}
+.chat-fab:hover { transform: translateY(-2px); background: var(--green-dark); }
+.chat-fab svg { width: 26px; height: 26px; }
+.chat-badge {
+  position: absolute; top: -3px; right: -3px; min-width: 20px; height: 20px; border-radius: 999px;
+  background: #ff5a3c; color: #fff; font-size: .68rem; font-weight: 800; display: flex;
+  align-items: center; justify-content: center; border: 2px solid #fff;
+}
+.chat.open .chat-badge { display: none; }
+.chat-panel {
+  position: absolute; right: 0; bottom: 72px; width: 360px; max-width: calc(100vw - 36px);
+  background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(16, 35, 26, .22); display: none; flex-direction: column;
+}
+.chat.open .chat-panel { display: flex; animation: chatIn .18s ease-out; }
+@keyframes chatIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: var(--ink); color: #fff; }
+.chat-head b { display: block; font-size: .92rem; }
+.chat-head small { display: flex; align-items: center; gap: 6px; font-size: .72rem; color: rgba(255,255,255,.72); }
+.chat-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; display: inline-block; }
+.chat-avatar { width: 34px; height: 34px; border-radius: 10px; background: var(--green); color: #fff; font-size: .72rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.chat-close { margin-left: auto; background: transparent; border: 0; color: rgba(255,255,255,.8); font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0 2px; }
+.chat-close:hover { color: #fff; }
+.chat-log { padding: 16px; height: 280px; overflow-y: auto; background: var(--bg-alt); display: flex; flex-direction: column; gap: 10px; }
+.chat-msg { max-width: 84%; padding: 10px 13px; border-radius: 14px; font-size: .86rem; line-height: 1.5; }
+.chat-msg.bot { align-self: flex-start; background: #fff; border: 1px solid var(--line); color: var(--body); border-bottom-left-radius: 5px; }
+.chat-msg.user { align-self: flex-end; background: var(--green); color: #fff; border-bottom-right-radius: 5px; }
+.chat-msg a { color: var(--green-dark); font-weight: 700; text-decoration: underline; }
+.chat-typing { display: inline-flex; gap: 4px; align-items: center; }
+.chat-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1s infinite; }
+.chat-typing i:nth-child(2) { animation-delay: .15s; }
+.chat-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes blink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+.chat-quick { display: flex; gap: 7px; padding: 10px 14px 4px; flex-wrap: wrap; background: #fff; }
+.chat-quick button {
+  border: 1px solid var(--line-strong); background: #fff; color: var(--ink); border-radius: 999px;
+  padding: 6px 11px; font-size: .74rem; font-weight: 600; cursor: pointer; transition: .15s;
+}
+.chat-quick button:hover { border-color: var(--green); color: var(--green-dark); background: #f2fbf5; }
+.chat-form { display: flex; gap: 8px; padding: 10px 14px 6px; background: #fff; }
+.chat-form input {
+  flex: 1; border: 1px solid var(--line-strong); border-radius: 10px; padding: 10px 12px;
+  font: inherit; font-size: .85rem; color: var(--ink); outline: none;
+}
+.chat-form input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,169,79,.12); }
+.chat-send { width: 40px; height: 40px; border-radius: 10px; border: 0; background: var(--green); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.chat-send:hover { background: var(--green-dark); }
+.chat-send svg { width: 17px; height: 17px; }
+.chat-fine { margin: 0; padding: 0 14px 12px; font-size: .66rem; color: var(--muted); background: #fff; }
+
+@media (max-width: 600px) {
+  .chat { right: 14px; bottom: 14px; }
+  .chat-fab { width: 52px; height: 52px; }
+  .chat-panel { position: fixed; right: 10px; left: 10px; bottom: 78px; width: auto; max-width: none; }
+  .chat-log { height: 44vh; }
+}
+@media print { .chat { display: none !important; } }
+
+</style>
+</head>
+<body>
+
+<!-- ============================== HEADER ============================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#/home" aria-label="LoanHub home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6.5c0-1.9-2.2-3.5-5-3.5S7 4.6 7 6.5 9.2 10 12 10s5 1.6 5 3.5-2.2 3.5-5 3.5-5-1.6-5-3.5"/></svg>
+      </span>
+      LoanHub
+    </a>
+
+    <nav class="main-nav" aria-label="Main">
+      <a href="#/home" data-nav="home">Home</a>
+      <a href="#/apply" data-nav="apply">Apply</a>
+      <a href="#/rates" data-nav="rates">Rates</a>
+      <a href="#/dashboard" data-nav="dashboard">My loan</a>
+      <a href="#/home#how" data-nav="how">How it works</a>
+    </nav>
+
+    <div class="header-actions">
+      <span class="header-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        1-800-555-0142
+      </span>
+      <a class="btn btn-ghost btn-sm" href="#/login" id="headerAuth">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="#/apply">Check my rate</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#/home">Home</a>
+    <a href="#/apply">Apply for a loan</a>
+    <a href="#/rates">Rates &amp; terms</a>
+    <a href="#/dashboard">My loan</a>
+    <a href="#/login">Sign in</a>
+    <a class="btn btn-primary btn-block" href="#/apply">Check my rate</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- =============================== HOME =============================== -->
+<section class="route" id="route-home" hidden>
+
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Fixed rates from 5.99% APR</span>
+        <h1>Borrow with confidence.<br /><span class="hl">Repay with clarity.</span></h1>
+        <p class="hero-sub">Personal loans from $2,000 to $100,000, funded as soon as the same business day. Check your rate in two minutes — no impact to your credit score.</p>
+
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            No origination fees
+          </div>
+          <div class="hero-fact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Fixed monthly payments
+          </div>
+          <div class="hero-fact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Pay off early, no penalty
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#/apply">Check my rate</a>
+          <a class="btn btn-light btn-lg" href="#calc">Calculate a payment</a>
+        </div>
+        <p class="hero-note">Checking your rate uses a soft credit pull and won't affect your score.</p>
+      </div>
+
+      <div class="ratecard" id="rateCard">
+        <span class="rc-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          2-minute rate check
+        </span>
+        <h2>See your rate in seconds</h2>
+        <p class="rc-sub">Answer three questions. No hard credit pull.</p>
+
+        <div class="field">
+          <label for="rcAmount">How much do you need?</label>
+          <div class="input-wrap has-prefix">
+            <span class="prefix">$</span>
+            <input class="input" id="rcAmount" type="number" inputmode="numeric" min="2000" max="100000" step="500" value="15000" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="rcPurpose">What's it for?</label>
+          <select class="input" id="rcPurpose">
+            <option>Debt consolidation</option>
+            <option>Home improvement</option>
+            <option>Major purchase</option>
+            <option>Medical expense</option>
+            <option>Auto expense</option>
+            <option>Business</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rcCredit">Your credit score</label>
+          <select class="input" id="rcCredit">
+            <option value="excellent">Excellent (720+)</option>
+            <option value="good" selected>Good (690–719)</option>
+            <option value="fair">Fair (630–689)</option>
+            <option value="poor">Building (&lt;630)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-block" id="rcGo">Check my rate</button>
+        <p class="tiny muted" style="margin:12px 0 0;text-align:center">By continuing you agree to our Terms and Privacy Policy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Loan products</span>
+        <h2>One lender for every big money move</h2>
+        <p>Fixed-rate financing with transparent pricing and no hidden fees. Pick the loan that fits what you're funding.</p>
+      </div>
+      <div class="prod-grid">
+        <a class="prod" href="#/apply?product=personal">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></span>
+          <h3>Personal loans</h3>
+          <p>Consolidate debt or cover a big expense with one fixed monthly payment.</p>
+          <span class="prod-rate">From 5.99% APR <span>· $2k–$100k</span></span>
+        </a>
+        <a class="prod" href="#/apply?product=student">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+          <h3>Student loans</h3>
+          <p>Refinance or fund tuition with in-school and cosigner-friendly options.</p>
+          <span class="prod-rate">From 4.49% APR <span>· $1k–$150k</span></span>
+        </a>
+        <a class="prod" href="#/apply?product=auto">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/><path d="M3 14V9l3-4h12l3 4v5"/></svg></span>
+          <h3>Auto loans</h3>
+          <p>Buy new or used, or refinance your current car loan at a lower rate.</p>
+          <span class="prod-rate">From 5.24% APR <span>· $5k–$85k</span></span>
+        </a>
+        <a class="prod" href="#/apply?product=home">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10z"/></svg></span>
+          <h3>Home improvement</h3>
+          <p>Renovate, repair or upgrade without tapping your home equity.</p>
+          <span class="prod-rate">From 6.49% APR <span>· $2k–$100k</span></span>
+        </a>
+        <a class="prod" href="#/apply?product=business">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></span>
+          <h3>Business loans</h3>
+          <p>Working capital, equipment and expansion financing for small business.</p>
+          <span class="prod-rate">From 7.49% APR <span>· $5k–$500k</span></span>
+        </a>
+        <a class="prod" href="#/apply?product=debt">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></span>
+          <h3>Debt consolidation</h3>
+          <p>Roll high-interest balances into one loan with a single, lower payment.</p>
+          <span class="prod-rate">From 5.99% APR <span>· $2k–$100k</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section alt" id="how">
+    <div class="container">
+      <div class="section-head center">
+        <span class="kicker">How it works</span>
+        <h2>From application to funds in three steps</h2>
+        <p>Most approved borrowers see money in their account the same business day.</p>
+      </div>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Check your rate</h3>
+          <p>Tell us the amount, purpose and a little about you. It takes two minutes and uses a soft credit pull.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Pick your offer</h3>
+          <p>Choose your amount and term. You'll see the exact APR, monthly payment and total cost before you accept.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Get funded</h3>
+          <p>Verify your details, e-sign, and we'll send funds to your bank — often the same business day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="section" id="calc">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Payment calculator</span>
+        <h2>See what your monthly payment could be</h2>
+        <p>Move the sliders to model any amount, rate and term. Estimates use a standard amortizing loan.</p>
+      </div>
+      <div class="calc">
+        <div class="calc-panel">
+          <div class="slider-row">
+            <div class="slider-head"><label for="calcAmount">Loan amount</label><output id="calcAmountOut">$15,000</output></div>
+            <input type="range" id="calcAmount" min="2000" max="100000" step="500" value="15000" />
+            <div class="range-scale"><span>$2,000</span><span>$100,000</span></div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-head"><label for="calcRate">Interest rate (APR)</label><output id="calcRateOut">8.99%</output></div>
+            <input type="range" id="calcRate" min="4.99" max="29.99" step="0.01" value="8.99" />
+            <div class="range-scale"><span>4.99%</span><span>29.99%</span></div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-head"><label for="calcTerm">Loan term</label><output id="calcTermOut">36 months</output></div>
+            <input type="range" id="calcTerm" min="12" max="84" step="12" value="36" />
+            <div class="range-scale"><span>12 mo</span><span>84 mo</span></div>
+          </div>
+          <a class="btn btn-primary btn-block" href="#/apply" id="calcApply">Apply for this loan</a>
+        </div>
+
+        <div class="calc-result">
+          <div class="pay-label">Estimated monthly payment</div>
+          <div class="pay" id="calcPay">$477<small>/mo</small></div>
+          <div class="calc-rows">
+            <div class="calc-row"><span>Total principal</span><b id="calcPrincipal">$15,000</b></div>
+            <div class="calc-row"><span>Total interest</span><b id="calcInterest">$2,180</b></div>
+            <div class="calc-row"><span>Total cost of loan</span><b id="calcTotal">$17,180</b></div>
+            <div class="calc-row"><span>Payoff date</span><b id="calcPayoff">—</b></div>
+          </div>
+          <div class="bar"><i class="b1" id="calcBar1" style="width:87%"></i><i class="b2" id="calcBar2" style="width:13%"></i></div>
+          <div class="legend"><span><i style="background:var(--lime)"></i> Principal</span><span><i style="background:rgba(255,255,255,.42)"></i> Interest</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="section dark tight">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:26px">
+        <h2 style="margin-bottom:0">Lending people actually recommend</h2>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">$<span>4.2</span>B</div><div class="lbl">Funded to borrowers since 2014</div></div>
+        <div class="stat"><div class="num">1.8<span>M</span></div><div class="lbl">Loans originated nationwide</div></div>
+        <div class="stat"><div class="num">4.8<span>/5</span></div><div class="lbl">Average customer rating</div></div>
+        <div class="stat"><div class="num">24<span>hr</span></div><div class="lbl">Typical time to funding</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <span class="kicker">Borrower stories</span>
+        <h2>Real people, real progress</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote">
+          <div class="stars" aria-label="5 out of 5">★★★★★</div>
+          <p>"I consolidated four credit cards into one loan and cut my monthly payment by $210. The rate I was quoted was the rate I got."</p>
+          <div class="who"><span class="av">MR</span><div><b>Marcus R.</b><span>Debt consolidation · $18,000</span></div></div>
+        </div>
+        <div class="quote">
+          <div class="stars" aria-label="5 out of 5">★★★★★</div>
+          <p>"Applied on a Tuesday morning, money hit my account that afternoon. The payment schedule was laid out before I signed anything."</p>
+          <div class="who"><span class="av">JT</span><div><b>Jasmine T.</b><span>Home improvement · $32,000</span></div></div>
+        </div>
+        <div class="quote">
+          <div class="stars" aria-label="5 out of 5">★★★★★</div>
+          <p>"No origination fee and no penalty when I paid it off a year early. That alone saved me almost $400."</p>
+          <div class="who"><span class="av">DK</span><div><b>David K.</b><span>Auto loan · $12,500</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head center">
+        <span class="kicker">Questions</span>
+        <h2>Everything you need to know</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Will checking my rate hurt my credit score? <span class="plus">+</span></button>
+          <div class="faq-a">No. Checking your rate uses a soft credit inquiry, which is visible only to you and does not affect your score. A hard inquiry happens only if you accept an offer and proceed to funding.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How fast can I get the money? <span class="plus">+</span></button>
+          <div class="faq-a">Most borrowers who are approved and complete verification before 1:00 p.m. ET receive funds the same business day. Otherwise funds typically arrive the next business day, depending on your bank.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What credit score do I need? <span class="plus">+</span></button>
+          <div class="faq-a">Our borrowers typically have scores of 640 or higher, but we review the full picture — income, existing debt and payment history. Adding a cosigner can improve your chances and your rate.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Are there any fees? <span class="plus">+</span></button>
+          <div class="faq-a">There are no origination fees, application fees or prepayment penalties. You may owe a late fee if a payment is more than 15 days past due. The APR you're quoted includes all interest and fees.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I pay off my loan early? <span class="plus">+</span></button>
+          <div class="faq-a">Yes, at any time with no penalty. Paying extra reduces your principal and shortens your term, which lowers the total interest you pay. You can make extra payments from your loan dashboard.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What can I use a personal loan for? <span class="plus">+</span></button>
+          <div class="faq-a">Debt consolidation, home improvement, medical bills, a major purchase, moving costs, a wedding or almost any other legitimate expense. Funds cannot be used for illegal activity, gambling or higher-education tuition (use a student loan for that).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container center">
+      <h2>Ready to see your rate?</h2>
+      <p class="muted" style="max-width:520px;margin:0 auto 24px">Two minutes, three questions, no impact to your credit score.</p>
+      <a class="btn btn-primary btn-lg" href="#/apply">Check my rate</a>
+    </div>
+  </section>
+</section>
+
+<!-- =============================== RATES =============================== -->
+<section class="route" id="route-rates" hidden>
+  <div class="section" style="padding-top:44px">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Rates &amp; terms</span>
+        <h1 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">Transparent pricing, no surprises</h1>
+        <p>Every rate below is a fixed APR that includes interest and fees. Your actual rate depends on credit, term and loan amount — and you'll see it before you accept.</p>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:26px">
+        <table class="data">
+          <thead>
+            <tr><th>Loan product</th><th>Amounts</th><th>Terms</th><th>APR from</th><th>Funding</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="strong">Personal loan</td><td>$2,000 – $100,000</td><td>24 – 84 months</td><td class="apr">5.99%<small>up to 24.99%</small></td><td>Same day</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=personal">Check rate</a></td></tr>
+            <tr><td class="strong">Debt consolidation</td><td>$2,000 – $100,000</td><td>24 – 84 months</td><td class="apr">5.99%<small>up to 24.99%</small></td><td>Same day</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=debt">Check rate</a></td></tr>
+            <tr><td class="strong">Home improvement</td><td>$2,000 – $100,000</td><td>24 – 84 months</td><td class="apr">6.49%<small>up to 24.99%</small></td><td>Same day</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=home">Check rate</a></td></tr>
+            <tr><td class="strong">Auto loan</td><td>$5,000 – $85,000</td><td>24 – 72 months</td><td class="apr">5.24%<small>up to 19.99%</small></td><td>1–2 days</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=auto">Check rate</a></td></tr>
+            <tr><td class="strong">Student loan refinance</td><td>$1,000 – $150,000</td><td>60 – 240 months</td><td class="apr">4.49%<small>up to 14.99%</small></td><td>3–5 days</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=student">Check rate</a></td></tr>
+            <tr><td class="strong">Business loan</td><td>$5,000 – $500,000</td><td>12 – 60 months</td><td class="apr">7.49%<small>up to 29.99%</small></td><td>2–3 days</td><td><a class="btn btn-primary btn-sm" href="#/apply?product=business">Check rate</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prod-grid">
+        <div class="prod" style="cursor:default">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <h3>Rates in 2 minutes</h3>
+          <p>Soft credit pull only. No fee to check and no obligation to accept.</p>
+        </div>
+        <div class="prod" style="cursor:default">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6.5c0-1.9-2.2-3.5-5-3.5S7 4.6 7 6.5 9.2 10 12 10s5 1.6 5 3.5-2.2 3.5-5 3.5-5-1.6-5-3.5"/></svg></span>
+          <h3>Zero origination fees</h3>
+          <p>The APR you see is the APR you pay. No application, processing or prepayment fees.</p>
+        </div>
+        <div class="prod" style="cursor:default">
+          <span class="prod-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <h3>Bank-level security</h3>
+          <p>256-bit encryption, SOC 2 controls and never a fee to speak with a human.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:34px;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--bg-alt)">
+        <h3 style="font-size:.95rem">Rate and fee disclosures</h3>
+        <p class="small muted" style="margin-bottom:0">APRs shown are the lowest available for the product and assume excellent credit, a 36-month term and autopay enrollment. Your rate may be higher. Maximum APR is 29.99%. Late payment fee: the lesser of 5% of the past-due amount or $15. Returned payment fee: $15. There is no prepayment penalty. Loan amounts, terms and availability vary by state. All loans are subject to credit approval. Example: a $10,000 loan at 8.99% APR over 36 months has a monthly payment of $318.00 and a total cost of $11,448.00.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== APPLY =============================== -->
+<section class="route" id="route-apply" hidden>
+  <div class="apply-shell">
+    <div class="container">
+
+      <div class="apply-head" id="applyHead">
+        <h1>Check your rate</h1>
+        <p>Four short steps. Soft credit pull only — your score stays untouched.</p>
+      </div>
+
+      <div class="progress" id="applyProgress" aria-label="Application progress">
+        <div class="p-step active" data-p="1"><div class="p-dot">1</div><div class="p-label">Loan details</div></div>
+        <div class="p-step" data-p="2"><div class="p-dot">2</div><div class="p-label">About you</div></div>
+        <div class="p-step" data-p="3"><div class="p-dot">3</div><div class="p-label">Income</div></div>
+        <div class="p-step" data-p="4"><div class="p-dot">4</div><div class="p-label">Review</div></div>
+      </div>
+
+      <div class="apply-card" id="applyCard">
+        <!-- STEP 1 -->
+        <div class="apply-step active" data-step="1">
+          <h2>How much do you need?</h2>
+          <p class="step-sub">Choose what you're funding, then set your amount and term.</p>
+
+          <div class="field">
+            <span class="field-label">What's the loan for?</span>
+            <div class="opt-grid" id="purposeGrid">
+              <button type="button" class="opt selected" data-purpose="Debt consolidation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg>
+                Debt consolidation
+              </button>
+              <button type="button" class="opt" data-purpose="Home improvement">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10z"/></svg>
+                Home improvement
+              </button>
+              <button type="button" class="opt" data-purpose="Major purchase">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Major purchase
+              </button>
+              <button type="button" class="opt" data-purpose="Medical expense">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                Medical expense
+              </button>
+              <button type="button" class="opt" data-purpose="Auto expense">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M3 14V9l3-4h12l3 4v5"/><circle cx="6.5" cy="15.5" r="1.5"/><circle cx="17.5" cy="15.5" r="1.5"/></svg>
+                Auto expense
+              </button>
+              <button type="button" class="opt" data-purpose="Business">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Business
+              </button>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:22px">
+            <span class="field-label">Loan amount</span>
+            <div class="amount-display">
+              <span class="cur">$</span>
+              <input id="apAmount" type="number" inputmode="numeric" min="2000" max="100000" step="500" value="15000" aria-label="Loan amount" />
+            </div>
+            <input type="range" id="apAmountRange" min="2000" max="100000" step="500" value="15000" />
+            <div class="range-scale"><span>$2,000</span><span>$100,000</span></div>
+          </div>
+
+          <div class="field" style="margin-top:20px">
+            <span class="field-label">Repayment term</span>
+            <div class="chips" id="termChips">
+              <button type="button" class="chip" data-term="24">24 months</button>
+              <button type="button" class="chip selected" data-term="36">36 months</button>
+              <button type="button" class="chip" data-term="48">48 months</button>
+              <button type="button" class="chip" data-term="60">60 months</button>
+              <button type="button" class="chip" data-term="84">84 months</button>
+            </div>
+          </div>
+
+          <div class="apply-nav">
+            <a class="btn btn-ghost" href="#/home">Cancel</a>
+            <button class="btn btn-primary" id="apNext1">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="apply-step" data-step="2">
+          <h2>Tell us about you</h2>
+          <p class="step-sub">We use this to verify your identity and match you with the right offer.</p>
+
+          <div class="two-col">
+            <div class="field" data-f="firstName">
+              <label for="apFirst">First name</label>
+              <input class="input" id="apFirst" autocomplete="given-name" placeholder="Alex" />
+              <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your first name.</p>
+            </div>
+            <div class="field" data-f="lastName">
+              <label for="apLast">Last name</label>
+              <input class="input" id="apLast" autocomplete="family-name" placeholder="Morgan" />
+              <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your last name.</p>
+            </div>
+          </div>
+
+          <div class="field" data-f="email">
+            <label for="apEmail">Email address</label>
+            <input class="input" id="apEmail" type="email" autocomplete="email" placeholder="alex@example.com" />
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a valid email address.</p>
+          </div>
+
+          <div class="field" data-f="phone">
+            <label for="apPhone">Mobile phone</label>
+            <input class="input" id="apPhone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" />
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a 10-digit phone number.</p>
+          </div>
+
+          <div class="field" data-f="address">
+            <label for="apAddress">Street address</label>
+            <input class="input" id="apAddress" autocomplete="street-address" placeholder="123 Main St, Apt 4" />
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your street address.</p>
+          </div>
+
+          <div class="two-col">
+            <div class="field" data-f="city">
+              <label for="apCity">City</label>
+              <input class="input" id="apCity" autocomplete="address-level2" placeholder="Austin" />
+              <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your city.</p>
+            </div>
+            <div class="two-col" style="gap:12px">
+              <div class="field" data-f="state">
+                <label for="apState">State</label>
+                <select class="input" id="apState">
+                  <option value="">Select</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+                </select>
+                <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Select a state.</p>
+              </div>
+              <div class="field" data-f="zip">
+                <label for="apZip">ZIP</label>
+                <input class="input" id="apZip" inputmode="numeric" maxlength="5" placeholder="78701" />
+                <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a 5-digit ZIP.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" data-f="dob">
+            <label for="apDob">Date of birth</label>
+            <input class="input" id="apDob" type="date" max="2007-12-31" />
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>You must be at least 18 to apply.</p>
+          </div>
+
+          <div class="apply-nav">
+            <button class="btn btn-ghost" data-back="1">Back</button>
+            <button class="btn btn-primary" id="apNext2">Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="apply-step" data-step="3">
+          <h2>Income &amp; employment</h2>
+          <p class="step-sub">This helps us confirm you can comfortably handle the payments.</p>
+
+          <div class="field" data-f="employment">
+            <label for="apEmployment">Employment status</label>
+            <select class="input" id="apEmployment">
+              <option value="">Select status</option>
+              <option>Employed full-time</option>
+              <option>Employed part-time</option>
+              <option>Self-employed</option>
+              <option>Retired</option>
+              <option>Student</option>
+              <option>Other</option>
+            </select>
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Select your employment status.</p>
+          </div>
+
+          <div class="field" data-f="employer">
+            <label for="apEmployer">Employer or business name</label>
+            <input class="input" id="apEmployer" placeholder="Northwind Traders" />
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your employer.</p>
+          </div>
+
+          <div class="two-col">
+            <div class="field" data-f="income">
+              <label for="apIncome">Monthly income (before tax)</label>
+              <div class="input-wrap has-prefix">
+                <span class="prefix">$</span>
+                <input class="input" id="apIncome" type="number" inputmode="numeric" min="0" step="100" placeholder="6500" />
+              </div>
+              <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter at least $1,000.</p>
+            </div>
+            <div class="field" data-f="housing">
+              <label for="apHousing">Monthly housing payment</label>
+              <div class="input-wrap has-prefix">
+                <span class="prefix">$</span>
+                <input class="input" id="apHousing" type="number" inputmode="numeric" min="0" step="50" placeholder="1800" />
+              </div>
+              <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your housing payment (0 if none).</p>
+            </div>
+          </div>
+
+          <div class="field" data-f="creditBand">
+            <label for="apCredit">Estimated credit score</label>
+            <select class="input" id="apCredit">
+              <option value="excellent">Excellent (720+)</option>
+              <option value="good" selected>Good (690–719)</option>
+              <option value="fair">Fair (630–689)</option>
+              <option value="poor">Building (&lt;630)</option>
+            </select>
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Select a credit range.</p>
+          </div>
+
+          <div class="field" data-f="consent" style="margin-top:22px">
+            <label class="check"><input type="checkbox" id="apConsent" /> <span>I authorize LoanHub to obtain a soft credit report to verify my rate. I understand this will not affect my credit score.</span></label>
+            <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Please authorize the soft credit check.</p>
+          </div>
+
+          <div class="apply-nav">
+            <button class="btn btn-ghost" data-back="2">Back</button>
+            <button class="btn btn-primary" id="apNext3">Review my application</button>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="apply-step" data-step="4">
+          <h2>Review and submit</h2>
+          <p class="step-sub">Confirm your details. You can still go back and edit anything.</p>
+
+          <div class="summary-box" id="apSummary"></div>
+
+          <div class="field">
+            <label class="check"><input type="checkbox" id="apAgree" /> <span>I confirm the information above is accurate and I agree to the <a href="#/rates">Terms of Use</a>, <a href="#/rates">Privacy Policy</a> and <a href="#/rates">Electronic Communications Agreement</a>.</span></label>
+            <p class="err" id="agreeErr" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Please confirm before submitting.</p>
+          </div>
+
+          <div class="apply-nav">
+            <button class="btn btn-ghost" data-back="3">Back</button>
+            <button class="btn btn-primary" id="apSubmit">
+              <span class="spin"></span><span class="lbl">See my offer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- OFFER -->
+      <div class="offer" id="offerWrap" hidden>
+        <div class="offer-card">
+          <div class="offer-top">
+            <span class="ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg>
+              You're pre-approved
+            </span>
+            <h2 id="offerName">You've got an offer, Alex.</h2>
+            <p>Here's your personalized rate. It's locked for 30 days — no obligation to accept.</p>
+          </div>
+          <div class="offer-body">
+            <div class="offer-grid">
+              <div class="offer-cell"><div class="k">Loan amount</div><div class="v" id="offAmount">$15,000</div></div>
+              <div class="offer-cell"><div class="k">Fixed APR</div><div class="v" id="offApr">8.99%</div></div>
+              <div class="offer-cell"><div class="k">Monthly payment</div><div class="v" id="offPayment">$477<small>/mo</small></div></div>
+            </div>
+            <div class="summary-box" style="margin-bottom:20px">
+              <div class="summary-row"><span>Term</span><b id="offTerm">36 months</b></div>
+              <div class="summary-row"><span>Total interest</span><b id="offInterest">$2,180</b></div>
+              <div class="summary-row"><span>Origination fee</span><b>$0</b></div>
+              <div class="summary-row total"><span>Total cost of loan</span><b id="offTotal">$17,180</b></div>
+            </div>
+            <div class="offer-actions">
+              <button class="btn btn-primary btn-lg" id="offAccept">
+                <span class="spin"></span><span class="lbl">Accept &amp; get funded</span>
+              </button>
+              <button class="btn btn-ghost btn-lg" id="offAdjust">Adjust my offer</button>
+            </div>
+            <p class="offer-fine">By accepting, you agree to the loan agreement and authorize a hard credit inquiry. Funds are typically deposited within one business day after verification. Your first payment is due 30 days after funding.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUNDED -->
+      <div class="offer" id="fundedWrap" hidden>
+        <div class="offer-card">
+          <div class="offer-top" style="background:linear-gradient(150deg,#0a3a20,#12633a)">
+            <span class="ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M20 6 9 17l-5-5"/></svg>
+              Loan approved &amp; funded
+            </span>
+            <h2 id="fundedTitle">You're all set, Alex.</h2>
+            <p>Your loan is active. Funds are on the way to the account ending in •••• 4821.</p>
+          </div>
+          <div class="offer-body">
+            <div class="offer-grid">
+              <div class="offer-cell"><div class="k">Loan number</div><div class="v" id="fundedId" style="font-size:1.05rem">LH-000000</div></div>
+              <div class="offer-cell"><div class="k">First payment</div><div class="v" id="fundedFirst" style="font-size:1.05rem">—</div></div>
+              <div class="offer-cell"><div class="k">Monthly payment</div><div class="v" id="fundedPayment">$477<small>/mo</small></div></div>
+            </div>
+            <div class="offer-actions">
+              <a class="btn btn-primary btn-lg" href="#/dashboard">Go to my loan dashboard</a>
+              <a class="btn btn-ghost btn-lg" href="#/home">Back to home</a>
+            </div>
+            <p class="offer-fine">A confirmation and welcome packet has been emailed to you. Your payment schedule is available in your dashboard, and you can pay extra at any time with no penalty.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================= DASHBOARD ============================= -->
+<section class="route" id="route-dashboard" hidden>
+  <div class="section" style="padding-top:40px">
+    <div class="container">
+
+      <div id="dashEmpty" class="empty-state" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+        <h2 style="font-size:1.3rem">No active loan yet</h2>
+        <p>Check your rate in two minutes and see your personalized offer.</p>
+        <a class="btn btn-primary" href="#/apply" style="margin-top:8px">Check my rate</a>
+      </div>
+
+      <div id="dashMain" hidden>
+        <div class="dash-head">
+          <div>
+            <h1 id="dashHello">Welcome back, Alex</h1>
+            <p>Here's where things stand with your loan.</p>
+          </div>
+          <a class="btn btn-ghost btn-sm" href="#/apply">Apply for another loan</a>
+        </div>
+
+        <div class="dash-grid">
+          <div>
+            <div class="loan-card">
+              <div class="lc-top">
+                <div>
+                  <div class="lc-label">Current balance</div>
+                  <div class="lc-balance" id="dashBalance">$0<small> remaining</small></div>
+                </div>
+                <span class="status-pill" id="dashStatus">Active</span>
+              </div>
+              <div class="lc-meta">
+                <div><div class="k">Next payment</div><div class="v" id="dashNext">—</div></div>
+                <div><div class="k">Due date</div><div class="v" id="dashDue">—</div></div>
+                <div><div class="k">APR</div><div class="v" id="dashApr">—</div></div>
+              </div>
+              <div class="lc-progress">
+                <div class="track"><i id="dashBar" style="width:0%"></i></div>
+                <div class="cap"><span id="dashPaid">$0 paid</span><span id="dashTotal">of $0</span></div>
+              </div>
+            </div>
+
+            <div class="panel" style="margin-top:20px">
+              <h3>Payment schedule</h3>
+              <p class="small muted" style="margin-bottom:0">Your amortization schedule. Principal grows and interest shrinks over time.</p>
+              <div class="table-wrap" style="margin-top:14px;border-radius:10px">
+                <table class="data" style="min-width:520px">
+                  <thead><tr><th>#</th><th>Date</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+                  <tbody id="schedBody"></tbody>
+                </table>
+              </div>
+              <button class="btn btn-ghost btn-sm sched-toggle" id="schedToggle">Show full schedule</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="panel">
+              <h3>Make a payment</h3>
+              <p class="small muted" id="payHint">Pay your scheduled amount or extra — no penalty.</p>
+              <div class="pay-now">
+                <div class="amount-display">
+                  <span class="cur">$</span>
+                  <input id="payAmount" type="number" inputmode="decimal" min="1" step="0.01" aria-label="Payment amount" />
+                </div>
+                <div class="chips">
+                  <button class="chip" data-pay="min">Minimum</button>
+                  <button class="chip" data-pay="double">2× payment</button>
+                  <button class="chip" data-pay="payoff">Pay off</button>
+                </div>
+                <button class="btn btn-primary btn-block" id="payBtn">Submit payment</button>
+                <p class="tiny muted" style="margin:0;text-align:center">Demo ledger — payments update your balance instantly.</p>
+              </div>
+            </div>
+
+            <div class="panel" style="margin-top:20px">
+              <h3>Payment history</h3>
+              <ul class="history" id="payHistory"></ul>
+            </div>
+
+            <div class="panel" style="margin-top:20px">
+              <h3>Loan details</h3>
+              <div class="summary-row"><span>Loan number</span><b id="dLoanId">—</b></div>
+              <div class="summary-row"><span>Original amount</span><b id="dOriginal">—</b></div>
+              <div class="summary-row"><span>Term</span><b id="dTerm">—</b></div>
+              <div class="summary-row"><span>Origination date</span><b id="dStart">—</b></div>
+              <div class="summary-row"><span>Payoff date</span><b id="dPayoff">—</b></div>
+              <div class="summary-row"><span>Total interest (projected)</span><b id="dInterest">—</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================== LOGIN =============================== -->
+<section class="route" id="route-login" hidden>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-step active" id="authStepEmail">
+        <h1>Sign in to LoanHub</h1>
+        <p class="auth-sub">Manage your loan, payments and schedule.</p>
+        <div class="field" id="authEmailField">
+          <label for="authEmail">Email address</label>
+          <input class="input" id="authEmail" type="email" autocomplete="username" placeholder="you@example.com" />
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a valid email address.</p>
+        </div>
+        <button class="btn btn-primary btn-block" id="authNext"><span class="spin"></span><span class="lbl">Continue</span></button>
+        <p class="auth-alt">New here? <a href="#/apply">Check your rate</a> — it creates your account.</p>
+      </div>
+
+      <div class="auth-step" id="authStepPass">
+        <h1>Welcome back</h1>
+        <p class="auth-sub">Enter your password to continue.</p>
+        <div class="identity">
+          <span class="av" id="authAv">A</span>
+          <span class="who" id="authWho">you@example.com</span>
+          <button type="button" id="authEdit">Change</button>
+        </div>
+        <div class="field" id="authPassField">
+          <label for="authPass">Password</label>
+          <div class="input-wrap has-suffix">
+            <input class="input" id="authPass" type="password" autocomplete="current-password" placeholder="Enter your password" />
+            <button type="button" class="suffix" id="authToggle" style="border:0;background:none;font-weight:700;color:var(--green-dark);font-size:.8rem;padding:6px">Show</button>
+          </div>
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Password must be at least 8 characters.</p>
+        </div>
+        <button class="btn btn-primary btn-block" id="authSignIn"><span class="spin"></span><span class="lbl">Sign in</span></button>
+        <p class="auth-alt"><a href="#" id="authForgot">Forgot password?</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#/home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6.5c0-1.9-2.2-3.5-5-3.5S7 4.6 7 6.5 9.2 10 12 10s5 1.6 5 3.5-2.2 3.5-5 3.5-5-1.6-5-3.5"/></svg>
+          </span>
+          LoanHub
+        </a>
+        <p style="max-width:280px;margin-top:10px">Fixed-rate personal loans with transparent pricing, fast funding and a dashboard that keeps you ahead of every payment.</p>
+      </div>
+      <div>
+        <h4>Loans</h4>
+        <a href="#/apply?product=personal">Personal loans</a>
+        <a href="#/apply?product=debt">Debt consolidation</a>
+        <a href="#/apply?product=home">Home improvement</a>
+        <a href="#/apply?product=auto">Auto loans</a>
+        <a href="#/apply?product=student">Student loans</a>
+        <a href="#/apply?product=business">Business loans</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#/home#how">How it works</a>
+        <a href="#/rates">Rates &amp; terms</a>
+        <a href="#/home">Reviews</a>
+        <a href="#/home">Careers</a>
+        <a href="#/home">Contact us</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#/dashboard">My loan</a>
+        <a href="#/login">Sign in</a>
+        <a href="#/home">Help center</a>
+        <a href="#/rates">Disclosures</a>
+        <a href="#/home">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-note">
+      <p>LoanHub is a demonstration lending platform. All rates, offers and funding shown are illustrative and no real credit is extended. Loan products are subject to credit approval. APRs range from 5.99% to 29.99% and depend on creditworthiness, term and loan amount. Example: a $10,000 loan at 8.99% APR over 36 months has a monthly payment of $318.00 and a total cost of $11,448.00.</p>
+      <div class="footer-bottom">
+        <span>© 2026 LoanHub, Inc. All rights reserved. NMLS ID# 000000.</span>
+        <span>Terms · Privacy · Licenses · Do not sell my info</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ DEMO ASSISTANT ============================ -->
+<div class="chat" id="chat">
+  <button class="chat-fab" id="chatFab" aria-label="Open the LoanHub assistant" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.9 9.9 0 0 1-4.3-.9L3 21l1.9-4.6A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+    <span class="chat-badge">1</span>
+  </button>
+
+  <section class="chat-panel" id="chatPanel" aria-label="LoanHub assistant" aria-hidden="true">
+    <header class="chat-head">
+      <span class="chat-avatar" aria-hidden="true">LH</span>
+      <div>
+        <b>LoanHub Assistant</b>
+        <small><span class="chat-dot"></span> Demo bot · online</small>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close assistant">&times;</button>
+    </header>
+    <div class="chat-log" id="chatLog" aria-live="polite"></div>
+    <div class="chat-quick" id="chatQuick">
+      <button type="button" data-q="What rates do I qualify for?">Check my rate</button>
+      <button type="button" data-q="How much can I borrow?">Borrowing limits</button>
+      <button type="button" data-q="How fast is funding?">Funding speed</button>
+      <button type="button" data-q="What do I need to apply?">Requirements</button>
+    </div>
+    <form class="chat-form" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="Ask about rates, terms or payments…" aria-label="Message the assistant" />
+      <button type="submit" class="chat-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+      </button>
+    </form>
+    <p class="chat-fine">Demo assistant for illustration only. Not financial advice.</p>
+  </section>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Confirm payment</h3>
+    <p id="modalText">You're about to submit a payment.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+      <button class="btn btn-primary" id="modalOk">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   LoanHub — application logic
+   Router · rate engine · 4-step application · offer · dashboard ledger
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  /* ------------------------------- helpers -------------------------------- */
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var STORE = "loanhub.v1";
+
+  var money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  var money2 = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function fmt(n) { return money.format(Math.round(n)); }
+  function fmt2(n) { return money2.format(n); }
+  function pct(n) { return n.toFixed(2) + "%"; }
+
+  function parseDate(s) { var d = new Date(s + "T00:00:00"); return isNaN(d) ? new Date() : d; }
+  function addMonths(d, n) { var x = new Date(d.getTime()); x.setMonth(x.getMonth() + n); return x; }
+  function dateLabel(d) {
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+  function monthLabel(d) { return d.toLocaleDateString("en-US", { month: "short", year: "numeric" }); }
+
+  var toastEl = $("#toast"), toastTimer;
+  function toast(msg, kind) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.className = "toast show" + (kind ? " " + kind : "");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.className = "toast"; }, 3400);
+  }
+
+  /* -------------------------------- state --------------------------------- */
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (!raw) return { draft: null, loan: null, session: null };
+      var s = JSON.parse(raw);
+      return { draft: s.draft || null, loan: s.loan || null, session: s.session || null };
+    } catch (e) { return { draft: null, loan: null, session: null }; }
+  }
+  function saveState() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* storage may be blocked */ }
+  }
+  var state = loadState();
+
+  /* ------------------------------ rate engine ------------------------------ */
+  var BASE_APR = { excellent: 5.99, good: 8.99, fair: 13.99, poor: 19.99 };
+  var TERM_ADJ = { 24: -0.6, 36: 0, 48: 0.45, 60: 0.9, 84: 1.55 };
+
+  function quoteApr(creditBand, term, amount) {
+    var base = BASE_APR[creditBand] != null ? BASE_APR[creditBand] : 8.99;
+    var t = TERM_ADJ[term] != null ? TERM_ADJ[term] : 0;
+    var a = 0;
+    if (amount < 5000) a = 1.15;
+    else if (amount < 10000) a = 0.45;
+    else if (amount >= 50000) a = -0.35;
+    var apr = base + t + a;
+    return Math.min(29.99, Math.max(5.99, Math.round(apr * 100) / 100));
+  }
+
+  function monthlyPayment(principal, apr, months) {
+    var r = apr / 100 / 12;
+    if (r === 0) return principal / months;
+    return principal * r / (1 - Math.pow(1 + r, -months));
+  }
+
+  function amortize(principal, apr, months, startDate) {
+    var r = apr / 100 / 12;
+    var pay = monthlyPayment(principal, apr, months);
+    var bal = principal, rows = [], totalInt = 0;
+    for (var i = 1; i <= months; i++) {
+      var interest = bal * r;
+      var principalPart = pay - interest;
+      if (principalPart > bal) principalPart = bal;
+      bal = Math.max(0, bal - principalPart);
+      totalInt += interest;
+      rows.push({
+        n: i,
+        date: addMonths(startDate, i),
+        payment: principalPart + interest,
+        principal: principalPart,
+        interest: interest,
+        balance: bal
+      });
+      if (bal <= 0.005) break;
+    }
+    return { rows: rows, payment: pay, totalInterest: totalInt, totalCost: principal + totalInt };
+  }
+
+  /* -------------------------------- router -------------------------------- */
+  var routes = {
+    home: $("#route-home"),
+    apply: $("#route-apply"),
+    rates: $("#route-rates"),
+    dashboard: $("#route-dashboard"),
+    login: $("#route-login")
+  };
+
+  function parseHash() {
+    var h = (location.hash || "#/home").replace(/^#\/?/, "");
+    var qIndex = h.indexOf("?");
+    var query = {};
+    if (qIndex > -1) {
+      var qs = h.slice(qIndex + 1);
+      h = h.slice(0, qIndex);
+      qs.split("&").forEach(function (pair) {
+        var kv = pair.split("=");
+        if (kv[0]) query[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || "");
+      });
+    }
+    var anchor = "";
+    var aIndex = h.indexOf("#");
+    if (aIndex > -1) { anchor = h.slice(aIndex + 1); h = h.slice(0, aIndex); }
+    var name = h.split("/")[0] || "home";
+    if (!routes[name]) name = "home";
+    return { name: name, query: query, anchor: anchor };
+  }
+
+  function render() {
+    var r = parseHash();
+    Object.keys(routes).forEach(function (k) {
+      if (routes[k]) routes[k].hidden = k !== r.name;
+    });
+    $$("[data-nav]").forEach(function (a) {
+      a.classList.toggle("active", a.dataset.nav === r.name);
+    });
+    closeMobileNav();
+
+    if (r.name === "apply") initApply(r.query);
+    if (r.name === "dashboard") renderDashboard();
+    if (r.name === "login") resetAuth();
+    syncHeaderAuth();
+
+    if (r.anchor) {
+      var target = document.getElementById(r.anchor);
+      if (target) { setTimeout(function () { target.scrollIntoView({ behavior: "smooth", block: "start" }); }, 40); return; }
+    }
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  window.addEventListener("hashchange", render);
+
+  /* ------------------------------- mobile nav ------------------------------ */
+  var navToggle = $("#navToggle"), mobileNav = $("#mobileNav");
+  function closeMobileNav() {
+    if (mobileNav) mobileNav.classList.remove("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+  }
+  if (navToggle) navToggle.addEventListener("click", function () {
+    var open = mobileNav.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  if (mobileNav) $$("a", mobileNav).forEach(function (a) { a.addEventListener("click", closeMobileNav); });
+
+  /* --------------------------------- FAQ ---------------------------------- */
+  $$(".faq-q").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      var panel = btn.nextElementSibling;
+      if (panel) panel.classList.toggle("open", !open);
+    });
+  });
+
+  /* ----------------------------- home: rate card --------------------------- */
+  var rcGo = $("#rcGo");
+  if (rcGo) rcGo.addEventListener("click", function () {
+    var amount = clampAmount(parseFloat($("#rcAmount").value) || 15000);
+    var purpose = $("#rcPurpose").value;
+    var credit = $("#rcCredit").value;
+    state.draft = Object.assign({}, state.draft || {}, {
+      amount: amount, purpose: purpose, term: 36, creditBand: credit
+    });
+    saveState();
+    location.hash = "#/apply";
+  });
+
+  function clampAmount(v) {
+    if (isNaN(v)) return 15000;
+    return Math.min(100000, Math.max(2000, Math.round(v / 500) * 500));
+  }
+
+  /* ------------------------------- calculator ------------------------------ */
+  var calcAmount = $("#calcAmount"), calcRate = $("#calcRate"), calcTerm = $("#calcTerm");
+  function renderCalc() {
+    if (!calcAmount) return;
+    var P = parseFloat(calcAmount.value);
+    var apr = parseFloat(calcRate.value);
+    var n = parseInt(calcTerm.value, 10);
+    var pay = monthlyPayment(P, apr, n);
+    var total = pay * n;
+    var interest = total - P;
+    $("#calcAmountOut").textContent = fmt(P);
+    $("#calcRateOut").textContent = apr.toFixed(2) + "%";
+    $("#calcTermOut").textContent = n + " months";
+    $("#calcPay").innerHTML = fmt(pay) + "<small>/mo</small>";
+    $("#calcPrincipal").textContent = fmt(P);
+    $("#calcInterest").textContent = fmt(interest);
+    $("#calcTotal").textContent = fmt(total);
+    $("#calcPayoff").textContent = dateLabel(addMonths(new Date(), n));
+    var pctPrincipal = Math.round((P / total) * 100);
+    $("#calcBar1").style.width = pctPrincipal + "%";
+    $("#calcBar2").style.width = (100 - pctPrincipal) + "%";
+    var applyLink = $("#calcApply");
+    if (applyLink) applyLink.dataset.amount = P;
+  }
+  [calcAmount, calcRate, calcTerm].forEach(function (el) {
+    if (el) el.addEventListener("input", renderCalc);
+  });
+  var calcApply = $("#calcApply");
+  if (calcApply) calcApply.addEventListener("click", function () {
+    state.draft = Object.assign({}, state.draft || {}, {
+      amount: clampAmount(parseFloat(calcAmount.value)),
+      term: parseInt(calcTerm.value, 10),
+      creditBand: (state.draft && state.draft.creditBand) || "good"
+    });
+    saveState();
+  });
+
+  /* ================================ APPLY ================================= */
+  var applyStep = 1;
+  var draft = null;
+
+  function initApply(query) {
+    if (query && query.product) {
+      var map = {
+        personal: "Debt consolidation", debt: "Debt consolidation", home: "Home improvement",
+        auto: "Auto expense", student: "Other", business: "Business"
+      };
+      state.draft = Object.assign({}, state.draft || {}, { purpose: map[query.product] || "Debt consolidation" });
+      saveState();
+    }
+    draft = Object.assign({
+      purpose: "Debt consolidation", amount: 15000, term: 36,
+      firstName: "", lastName: "", email: "", phone: "", address: "", city: "", state: "", zip: "", dob: "",
+      employment: "", employer: "", income: "", housing: "", creditBand: "good", consent: false
+    }, state.draft || {});
+
+    // hydrate inputs
+    if ($("#apAmount")) $("#apAmount").value = draft.amount;
+    if ($("#apAmountRange")) $("#apAmountRange").value = draft.amount;
+    $$("#purposeGrid .opt").forEach(function (b) {
+      b.classList.toggle("selected", b.dataset.purpose === draft.purpose);
+    });
+    $$("#termChips .chip").forEach(function (c) {
+      c.classList.toggle("selected", parseInt(c.dataset.term, 10) === draft.term);
+    });
+    var FIELD_IDS = {
+      firstName: "apFirst", lastName: "apLast", email: "apEmail", phone: "apPhone",
+      address: "apAddress", city: "apCity", state: "apState", zip: "apZip", dob: "apDob",
+      employment: "apEmployment", employer: "apEmployer", income: "apIncome", housing: "apHousing"
+    };
+    Object.keys(FIELD_IDS).forEach(function (k) {
+      var el = $("#" + FIELD_IDS[k]);
+      if (el && draft[k] != null && draft[k] !== "") el.value = draft[k];
+    });
+    if ($("#apCredit")) $("#apCredit").value = draft.creditBand || "good";
+    if ($("#apConsent")) $("#apConsent").checked = !!draft.consent;
+
+    showApplyStep(1);
+    $("#applyCard").hidden = false;
+    $("#applyProgress").hidden = false;
+    $("#applyHead").hidden = false;
+    $("#offerWrap").hidden = true;
+    $("#fundedWrap").hidden = true;
+  }
+
+  function showApplyStep(n) {
+    applyStep = n;
+    $$(".apply-step").forEach(function (s) {
+      s.classList.toggle("active", parseInt(s.dataset.step, 10) === n);
+    });
+    $$("#applyProgress .p-step").forEach(function (p) {
+      var i = parseInt(p.dataset.p, 10);
+      p.classList.toggle("active", i === n);
+      p.classList.toggle("done", i < n);
+    });
+    var card = $("#applyCard");
+    if (card) window.scrollTo({ top: Math.max(0, card.getBoundingClientRect().top + window.pageYOffset - 100), behavior: "smooth" });
+  }
+
+  /* step 1 controls */
+  var apAmount = $("#apAmount"), apAmountRange = $("#apAmountRange");
+  if (apAmount && apAmountRange) {
+    apAmount.addEventListener("input", function () {
+      var v = clampAmount(parseFloat(apAmount.value) || 0);
+      apAmountRange.value = v;
+    });
+    apAmount.addEventListener("blur", function () {
+      var v = clampAmount(parseFloat(apAmount.value) || 0);
+      apAmount.value = v;
+      apAmountRange.value = v;
+    });
+    apAmountRange.addEventListener("input", function () {
+      apAmount.value = apAmountRange.value;
+    });
+  }
+  $$("#purposeGrid .opt").forEach(function (b) {
+    b.addEventListener("click", function () {
+      $$("#purposeGrid .opt").forEach(function (x) { x.classList.remove("selected"); });
+      b.classList.add("selected");
+    });
+  });
+  $$("#termChips .chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      $$("#termChips .chip").forEach(function (x) { x.classList.remove("selected"); });
+      c.classList.add("selected");
+    });
+  });
+
+  var apNext1 = $("#apNext1");
+  if (apNext1) apNext1.addEventListener("click", function () {
+    var selPurpose = $("#purposeGrid .opt.selected");
+    var selTerm = $("#termChips .chip.selected");
+    draft.purpose = selPurpose ? selPurpose.dataset.purpose : "Debt consolidation";
+    draft.amount = clampAmount(parseFloat(apAmount.value) || 15000);
+    draft.term = selTerm ? parseInt(selTerm.dataset.term, 10) : 36;
+    state.draft = Object.assign({}, state.draft || {}, draft);
+    saveState();
+    showApplyStep(2);
+  });
+
+  /* validation helpers */
+  function fieldOf(id) { return $("#" + id).closest(".field"); }
+  function mark(id, bad) {
+    var f = fieldOf(id);
+    if (f) f.classList.toggle("error", !!bad);
+    return !bad;
+  }
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || "").trim()); }
+  function digits(v) { return String(v || "").replace(/\D/g, ""); }
+  function ageFrom(dob) {
+    if (!dob) return 0;
+    var d = new Date(dob + "T00:00:00");
+    if (isNaN(d)) return 0;
+    var diff = Date.now() - d.getTime();
+    return Math.floor(diff / (365.25 * 24 * 3600 * 1000));
+  }
+
+  var apPhone = $("#apPhone");
+  if (apPhone) apPhone.addEventListener("input", function () {
+    var d = digits(apPhone.value).slice(0, 10);
+    var out = d;
+    if (d.length > 6) out = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+    else if (d.length > 3) out = "(" + d.slice(0, 3) + ") " + d.slice(3);
+    else if (d.length > 0) out = "(" + d;
+    apPhone.value = out;
+  });
+  var apZip = $("#apZip");
+  if (apZip) apZip.addEventListener("input", function () {
+    apZip.value = digits(apZip.value).slice(0, 5);
+  });
+
+  var apNext2 = $("#apNext2");
+  if (apNext2) apNext2.addEventListener("click", function () {
+    var ok = true;
+    ok = mark("apFirst", !$("#apFirst").value.trim()) && ok;
+    ok = mark("apLast", !$("#apLast").value.trim()) && ok;
+    ok = mark("apEmail", !isEmail($("#apEmail").value)) && ok;
+    ok = mark("apPhone", digits($("#apPhone").value).length !== 10) && ok;
+    ok = mark("apAddress", !$("#apAddress").value.trim()) && ok;
+    ok = mark("apCity", !$("#apCity").value.trim()) && ok;
+    ok = mark("apState", !$("#apState").value) && ok;
+    ok = mark("apZip", digits($("#apZip").value).length !== 5) && ok;
+    ok = mark("apDob", ageFrom($("#apDob").value) < 18) && ok;
+
+    if (!ok) {
+      var firstBad = $(".apply-step.active .field.error input, .apply-step.active .field.error select");
+      if (firstBad) firstBad.focus();
+      toast("Please fix the highlighted fields.", "warn");
+      return;
+    }
+    draft.firstName = $("#apFirst").value.trim();
+    draft.lastName = $("#apLast").value.trim();
+    draft.email = $("#apEmail").value.trim();
+    draft.phone = $("#apPhone").value.trim();
+    draft.address = $("#apAddress").value.trim();
+    draft.city = $("#apCity").value.trim();
+    draft.state = $("#apState").value;
+    draft.zip = $("#apZip").value;
+    draft.dob = $("#apDob").value;
+    state.draft = Object.assign({}, state.draft || {}, draft);
+    saveState();
+    showApplyStep(3);
+  });
+
+  var apNext3 = $("#apNext3");
+  if (apNext3) apNext3.addEventListener("click", function () {
+    var ok = true;
+    ok = mark("apEmployment", !$("#apEmployment").value) && ok;
+    ok = mark("apEmployer", !$("#apEmployer").value.trim()) && ok;
+    ok = mark("apIncome", !(parseFloat($("#apIncome").value) >= 1000)) && ok;
+    ok = mark("apHousing", $("#apHousing").value === "" || isNaN(parseFloat($("#apHousing").value))) && ok;
+    ok = mark("apConsent", !$("#apConsent").checked) && ok;
+
+    if (!ok) {
+      var bad = $(".apply-step.active .field.error input, .apply-step.active .field.error select");
+      if (bad) bad.focus();
+      toast("A few details still need attention.", "warn");
+      return;
+    }
+    draft.employment = $("#apEmployment").value;
+    draft.employer = $("#apEmployer").value.trim();
+    draft.income = parseFloat($("#apIncome").value) || 0;
+    draft.housing = parseFloat($("#apHousing").value) || 0;
+    draft.creditBand = $("#apCredit").value;
+    draft.consent = $("#apConsent").checked;
+    state.draft = Object.assign({}, state.draft || {}, draft);
+    saveState();
+    renderSummary();
+    showApplyStep(4);
+  });
+
+  function renderSummary() {
+    var apr = quoteApr(draft.creditBand, draft.term, draft.amount);
+    var pay = monthlyPayment(draft.amount, apr, draft.term);
+    var total = pay * draft.term;
+    var html = "" +
+      '<div class="summary-row"><span>Loan purpose</span><b>' + esc(draft.purpose) + "</b></div>" +
+      '<div class="summary-row"><span>Loan amount</span><b>' + fmt(draft.amount) + "</b></div>" +
+      '<div class="summary-row"><span>Term</span><b>' + draft.term + " months</b></div>" +
+      '<div class="summary-row"><span>Estimated APR</span><b>' + pct(apr) + "</b></div>" +
+      '<div class="summary-row"><span>Estimated monthly payment</span><b>' + fmt2(pay) + "</b></div>" +
+      '<div class="summary-row"><span>Name</span><b>' + esc(draft.firstName + " " + draft.lastName) + "</b></div>" +
+      '<div class="summary-row"><span>Email</span><b>' + esc(draft.email) + "</b></div>" +
+      '<div class="summary-row"><span>Address</span><b>' + esc(draft.address + ", " + draft.city + ", " + draft.state + " " + draft.zip) + "</b></div>" +
+      '<div class="summary-row"><span>Employment</span><b>' + esc(draft.employment) + "</b></div>" +
+      '<div class="summary-row total"><span>Estimated total cost</span><b>' + fmt(total) + "</b></div>";
+    $("#apSummary").innerHTML = html;
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  var apSubmit = $("#apSubmit");
+  if (apSubmit) apSubmit.addEventListener("click", function () {
+    var agree = $("#apAgree");
+    if (!agree.checked) {
+      $("#agreeErr").style.display = "flex";
+      toast("Please confirm your information first.", "warn");
+      return;
+    }
+    $("#agreeErr").style.display = "none";
+    apSubmit.classList.add("loading");
+    apSubmit.disabled = true;
+    setTimeout(function () {
+      apSubmit.classList.remove("loading");
+      apSubmit.disabled = false;
+      showOffer();
+    }, 1100);
+  });
+
+  /* ------------------------------ offer screen ---------------------------- */
+  var currentOffer = null;
+
+  function showOffer() {
+    var apr = quoteApr(draft.creditBand, draft.term, draft.amount);
+    var pay = monthlyPayment(draft.amount, apr, draft.term);
+    var total = pay * draft.term;
+    currentOffer = { apr: apr, payment: pay, total: total, interest: total - draft.amount };
+
+    $("#offerName").textContent = "You've got an offer, " + (draft.firstName || "friend") + ".";
+    $("#offAmount").textContent = fmt(draft.amount);
+    $("#offApr").textContent = pct(apr);
+    $("#offPayment").innerHTML = fmt(pay) + "<small>/mo</small>";
+    $("#offTerm").textContent = draft.term + " months";
+    $("#offInterest").textContent = fmt(currentOffer.interest);
+    $("#offTotal").textContent = fmt(total);
+
+    $("#applyCard").hidden = true;
+    $("#applyProgress").hidden = true;
+    $("#applyHead").hidden = true;
+    $("#offerWrap").hidden = false;
+    $("#fundedWrap").hidden = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  var offAdjust = $("#offAdjust");
+  if (offAdjust) offAdjust.addEventListener("click", function () {
+    $("#offerWrap").hidden = true;
+    $("#applyCard").hidden = false;
+    $("#applyProgress").hidden = false;
+    $("#applyHead").hidden = false;
+    showApplyStep(1);
+  });
+
+  var offAccept = $("#offAccept");
+  if (offAccept) offAccept.addEventListener("click", function () {
+    offAccept.classList.add("loading");
+    offAccept.disabled = true;
+    setTimeout(function () {
+      offAccept.classList.remove("loading");
+      offAccept.disabled = false;
+      createLoan();
+    }, 1300);
+  });
+
+  function createLoan() {
+    var start = new Date();
+    var loan = {
+      id: "LH-" + String(Math.floor(100000 + Math.random() * 899999)),
+      amount: draft.amount,
+      apr: currentOffer.apr,
+      term: draft.term,
+      payment: currentOffer.payment,
+      start: start.toISOString().slice(0, 10),
+      balance: draft.amount,
+      original: draft.amount,
+      purpose: draft.purpose,
+      borrower: (draft.firstName + " " + draft.lastName).trim() || "Borrower",
+      email: draft.email,
+      payments: [],
+      status: "Active"
+    };
+    state.loan = loan;
+    state.session = { email: draft.email, name: loan.borrower };
+    saveState();
+
+    $("#fundedTitle").textContent = "You're all set, " + (draft.firstName || "friend") + ".";
+    $("#fundedId").textContent = loan.id;
+    $("#fundedFirst").textContent = dateLabel(addMonths(start, 1));
+    $("#fundedPayment").innerHTML = fmt(loan.payment) + "<small>/mo</small>";
+    $("#offerWrap").hidden = true;
+    $("#fundedWrap").hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    syncHeaderAuth();
+    toast("Loan " + loan.id + " is active.", "ok");
+  }
+
+  /* ============================== DASHBOARD =============================== */
+  var schedExpanded = false;
+
+  function renderDashboard() {
+    var loan = state.loan;
+    var empty = $("#dashEmpty"), main = $("#dashMain");
+    if (!empty || !main) return;
+
+    if (!loan) {
+      empty.hidden = false;
+      main.hidden = true;
+      return;
+    }
+    empty.hidden = true;
+    main.hidden = false;
+
+    var start = parseDate(loan.start);
+    var firstName = (loan.borrower || "there").split(" ")[0];
+    $("#dashHello").textContent = "Welcome back, " + firstName;
+
+    var paid = loan.original - loan.balance;
+    var paidPct = Math.min(100, Math.max(0, (paid / loan.original) * 100));
+
+    $("#dashBalance").innerHTML = fmt(loan.balance) + "<small> remaining</small>";
+    $("#dashApr").textContent = pct(loan.apr);
+    $("#dashBar").style.width = paidPct + "%";
+    $("#dashPaid").textContent = fmt(paid) + " paid";
+    $("#dashTotal").textContent = "of " + fmt(loan.original);
+    $("#dashStatus").textContent = loan.balance <= 0.01 ? "Paid off" : "Active";
+
+    var nextDate = nextPaymentDate(loan);
+    $("#dashNext").textContent = loan.balance <= 0.01 ? "$0" : fmt2(Math.min(loan.payment, loan.balance + loan.balance * loan.apr / 1200));
+    $("#dashDue").textContent = loan.balance <= 0.01 ? "—" : dateLabel(nextDate);
+
+    // schedule
+    var sched = buildSchedule(loan);
+    renderSchedule(sched);
+
+    // details
+    $("#dLoanId").textContent = loan.id;
+    $("#dOriginal").textContent = fmt(loan.original);
+    $("#dTerm").textContent = loan.term + " months";
+    $("#dStart").textContent = dateLabel(start);
+    $("#dPayoff").textContent = sched.rows.length ? dateLabel(sched.rows[sched.rows.length - 1].date) : dateLabel(start);
+    $("#dInterest").textContent = fmt(sched.totalInterest);
+
+    // pay amount default
+    var payInput = $("#payAmount");
+    if (payInput) payInput.value = loan.balance <= 0.01 ? "" : Math.min(loan.payment, loan.balance).toFixed(2);
+    var payBtn = $("#payBtn");
+    if (payBtn) {
+      payBtn.disabled = loan.balance <= 0.01;
+      payBtn.textContent = loan.balance <= 0.01 ? "Loan paid off" : "Submit payment";
+    }
+    $("#payHint").textContent = loan.balance <= 0.01
+      ? "This loan is fully paid off. Nice work."
+      : "Pay your scheduled amount or extra — no penalty.";
+
+    renderHistory();
+  }
+
+  function nextPaymentDate(loan) {
+    var start = parseDate(loan.start);
+    var count = loan.payments.length;
+    return addMonths(start, count + 1);
+  }
+
+  function buildSchedule(loan) {
+    var start = parseDate(loan.start);
+    var monthsLeft = Math.max(1, loan.term - loan.payments.length);
+    if (loan.balance <= 0.01) return { rows: [], totalInterest: 0, payment: 0 };
+    return amortize(loan.balance, loan.apr, monthsLeft, addMonths(start, loan.payments.length));
+  }
+
+  function renderSchedule(sched) {
+    var body = $("#schedBody");
+    if (!body) return;
+    var rows = sched.rows;
+    var limit = schedExpanded ? rows.length : Math.min(12, rows.length);
+    var html = "";
+    for (var i = 0; i < limit; i++) {
+      var r = rows[i];
+      html += "<tr><td>" + r.n + "</td><td>" + monthLabel(r.date) + "</td><td>" + fmt2(r.payment) +
+        "</td><td>" + fmt2(r.principal) + "</td><td>" + fmt2(r.interest) + "</td><td>" + fmt2(r.balance) + "</td></tr>";
+    }
+    if (!rows.length) html = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:26px">This loan is paid in full.</td></tr>';
+    body.innerHTML = html;
+    var toggle = $("#schedToggle");
+    if (toggle) {
+      toggle.style.display = rows.length > 12 ? "inline-flex" : "none";
+      toggle.textContent = schedExpanded ? "Show less" : "Show full schedule (" + rows.length + " payments)";
+    }
+  }
+
+  var schedToggle = $("#schedToggle");
+  if (schedToggle) schedToggle.addEventListener("click", function () {
+    schedExpanded = !schedExpanded;
+    renderDashboard();
+  });
+
+  function renderHistory() {
+    var list = $("#payHistory");
+    if (!list) return;
+    var loan = state.loan;
+    var payments = (loan.payments || []).slice().reverse();
+    if (!payments.length) {
+      list.innerHTML = '<li style="border:0;color:var(--muted);font-size:.85rem">No payments yet. Your first payment is due ' +
+        dateLabel(addMonths(parseDate(loan.start), 1)) + ".</li>";
+      return;
+    }
+    list.innerHTML = payments.map(function (p) {
+      return '<li><span class="h-date">' + dateLabel(parseDate(p.date)) + "</span><span class=\"h-amt\">" + fmt2(p.amount) + "</span></li>";
+    }).join("");
+  }
+
+  /* payment flow */
+  var payBtn = $("#payBtn");
+  if (payBtn) payBtn.addEventListener("click", function () {
+    var loan = state.loan;
+    if (!loan || loan.balance <= 0.01) return;
+    var amt = parseFloat($("#payAmount").value);
+    if (!(amt > 0)) { toast("Enter a payment amount greater than zero.", "warn"); return; }
+    if (amt > loan.balance) amt = loan.balance;
+    openModal("Confirm payment", "You're about to pay " + fmt2(amt) + " toward loan " + loan.id + ".", function () {
+      applyPayment(amt);
+    });
+  });
+
+  $$("[data-pay]").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var loan = state.loan;
+      if (!loan) return;
+      var input = $("#payAmount");
+      if (chip.dataset.pay === "min") input.value = Math.min(loan.payment, loan.balance).toFixed(2);
+      if (chip.dataset.pay === "double") input.value = Math.min(loan.payment * 2, loan.balance).toFixed(2);
+      if (chip.dataset.pay === "payoff") input.value = (loan.balance + loan.balance * loan.apr / 1200).toFixed(2);
+    });
+  });
+
+  function applyPayment(amount) {
+    var loan = state.loan;
+    var interest = loan.balance * (loan.apr / 100 / 12);
+    var principal;
+    if (amount >= loan.balance) {
+      // Paying at least the remaining balance clears the loan in full.
+      principal = loan.balance;
+      interest = Math.max(0, amount - principal);
+    } else {
+      principal = Math.min(loan.balance, amount - interest);
+      if (principal < 0) principal = 0;
+    }
+    loan.balance = Math.max(0, loan.balance - principal);
+    loan.payments.push({
+      date: new Date().toISOString().slice(0, 10),
+      amount: amount,
+      principal: principal,
+      interest: Math.max(0, amount - principal)
+    });
+    if (loan.balance <= 0.01) { loan.balance = 0; loan.status = "Paid off"; }
+    state.loan = loan;
+    saveState();
+    renderDashboard();
+    syncHeaderAuth();
+    toast(loan.balance === 0 ? "Loan paid in full. Congratulations!" : "Payment of " + fmt2(amount) + " applied.", "ok");
+  }
+
+  /* modal */
+  var modalBack = $("#modalBack"), modalOk = $("#modalOk"), modalCancel = $("#modalCancel");
+  var modalAction = null;
+  function openModal(title, text, onOk) {
+    $("#modalTitle").textContent = title;
+    $("#modalText").textContent = text;
+    modalAction = onOk;
+    modalBack.classList.add("open");
+    modalOk.focus();
+  }
+  function closeModal() { modalBack.classList.remove("open"); modalAction = null; }
+  if (modalOk) modalOk.addEventListener("click", function () {
+    var fn = modalAction;
+    closeModal();
+    if (fn) fn();
+  });
+  if (modalCancel) modalCancel.addEventListener("click", closeModal);
+  if (modalBack) modalBack.addEventListener("click", function (e) { if (e.target === modalBack) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+
+  /* ================================ LOGIN ================================= */
+  var authStepEmail = $("#authStepEmail"), authStepPass = $("#authStepPass");
+
+  function resetAuth() {
+    if (!authStepEmail) return;
+    authStepEmail.classList.add("active");
+    authStepPass.classList.remove("active");
+    $("#authEmailField").classList.remove("error");
+    $("#authPassField").classList.remove("error");
+    if (state.session && state.session.email && $("#authEmail")) $("#authEmail").value = state.session.email;
+  }
+
+  var authNext = $("#authNext");
+  if (authNext) authNext.addEventListener("click", function () {
+    var email = $("#authEmail").value.trim();
+    if (!isEmail(email)) {
+      $("#authEmailField").classList.add("error");
+      $("#authEmail").focus();
+      return;
+    }
+    $("#authEmailField").classList.remove("error");
+    authNext.classList.add("loading");
+    setTimeout(function () {
+      authNext.classList.remove("loading");
+      $("#authWho").textContent = email;
+      $("#authAv").textContent = email.charAt(0).toUpperCase();
+      authStepEmail.classList.remove("active");
+      authStepPass.classList.add("active");
+      setTimeout(function () { $("#authPass").focus(); }, 120);
+    }, 500);
+  });
+
+  var authEdit = $("#authEdit");
+  if (authEdit) authEdit.addEventListener("click", function () {
+    authStepPass.classList.remove("active");
+    authStepEmail.classList.add("active");
+  });
+
+  var authToggle = $("#authToggle");
+  if (authToggle) authToggle.addEventListener("click", function () {
+    var p = $("#authPass");
+    var showing = p.type === "text";
+    p.type = showing ? "password" : "text";
+    authToggle.textContent = showing ? "Show" : "Hide";
+  });
+
+  var authSignIn = $("#authSignIn");
+  if (authSignIn) authSignIn.addEventListener("click", function () {
+    var pass = $("#authPass").value;
+    if (pass.length < 8) {
+      $("#authPassField").classList.add("error");
+      $("#authPass").focus();
+      return;
+    }
+    $("#authPassField").classList.remove("error");
+    authSignIn.classList.add("loading");
+    setTimeout(function () {
+      authSignIn.classList.remove("loading");
+      var email = $("#authWho").textContent;
+      state.session = { email: email, name: state.session ? state.session.name : email.split("@")[0] };
+      if (!state.loan) {
+        // create a sample loan so the dashboard has something to show after sign-in
+        toast("Signed in. Check your rate to open a loan.", "ok");
+        location.hash = "#/apply";
+        return;
+      }
+      saveState();
+      toast("Welcome back.", "ok");
+      location.hash = "#/dashboard";
+    }, 700);
+  });
+
+  var authForgot = $("#authForgot");
+  if (authForgot) authForgot.addEventListener("click", function (e) {
+    e.preventDefault();
+    toast("If an account exists for " + $("#authWho").textContent + ", a reset link is on its way.", "ok");
+  });
+
+  /* header auth label */
+  function syncHeaderAuth() {
+    var el = $("#headerAuth");
+    if (!el) return;
+    el.textContent = state.loan ? "My loan" : "Sign in";
+    el.setAttribute("href", state.loan ? "#/dashboard" : "#/login");
+  }
+
+  /* ============================ DEMO ASSISTANT ============================ */
+  var chat = $("#chat"), chatFab = $("#chatFab"), chatPanel = $("#chatPanel"),
+      chatClose = $("#chatClose"), chatLog = $("#chatLog"), chatForm = $("#chatForm"),
+      chatInput = $("#chatInput"), chatQuick = $("#chatQuick");
+  var chatGreeted = false;
+
+  function chatOpen(open) {
+    if (!chat) return;
+    chat.classList.toggle("open", open);
+    chatFab.setAttribute("aria-expanded", open ? "true" : "false");
+    chatPanel.setAttribute("aria-hidden", open ? "false" : "true");
+    if (open) {
+      if (!chatGreeted) {
+        chatGreeted = true;
+        botSay("Hi! I'm the LoanHub demo assistant. I can explain rates, limits, requirements and funding — or help you get started.");
+        setTimeout(function () { botSay("What would you like to know?"); }, 700);
+      }
+      setTimeout(function () { chatInput.focus(); }, 150);
+    }
+  }
+
+  function chatScroll() { if (chatLog) chatLog.scrollTop = chatLog.scrollHeight; }
+
+  function addMsg(text, who) {
+    var el = document.createElement("div");
+    el.className = "chat-msg " + who;
+    if (who === "bot") el.innerHTML = text;
+    else el.textContent = text;
+    chatLog.appendChild(el);
+    chatScroll();
+    return el;
+  }
+
+  function botSay(html, delay) {
+    var t = addMsg('<span class="chat-typing"><i></i><i></i><i></i></span>', "bot");
+    setTimeout(function () {
+      t.innerHTML = html;
+      chatScroll();
+    }, delay || 550);
+  }
+
+  var BOT = [
+    { k: ["rate", "apr", "interest", "qualify", "credit score", "score"],
+      a: "Rates start at <b>5.99% APR</b> and are fixed for the life of the loan. Your exact rate depends on credit, term and amount. Checking takes about two minutes and uses a soft credit pull — it won't affect your score. <a href=\"#/apply\">Check your rate →</a>" },
+    { k: ["how much", "borrow", "limit", "amount", "maximum", "max"],
+      a: "You can borrow <b>$2,000 to $100,000</b> on personal loans, with terms from <b>24 to 84 months</b>. Auto loans run $5,000–$85,000 and student refinance up to $150,000." },
+    { k: ["fast", "fund", "funding", "how long", "days", "deposit", "money"],
+      a: "Most personal and debt-consolidation loans are funded the <b>same business day</b> after you accept and verify your bank account. Auto loans take 1–2 days and student refinance 3–5 days." },
+    { k: ["need", "require", "requirement", "eligible", "eligibility", "documents", "apply"],
+      a: "To apply you need to be <b>18+</b>, a U.S. resident with a valid SSN, a steady income, and a checking account for funding. The application asks for contact details, employment and income — about 4 short steps. <a href=\"#/apply\">Start an application →</a>" },
+    { k: ["pay", "payment", "monthly", "due", "autopay", "extra"],
+      a: "Payments are monthly and fixed. You can pay the scheduled amount or extra at any time with <b>no prepayment penalty</b> — extra goes straight to principal. Manage everything from <a href=\"#/dashboard\">My loan</a>." },
+    { k: ["fee", "fees", "cost", "hidden", "origination"],
+      a: "There are <b>zero origination fees</b>, no application fee and no prepayment penalty. The APR you see includes interest and fees, so the price is the price." },
+    { k: ["soft", "hard", "pull", "report"],
+      a: "Checking your rate is a <b>soft credit pull</b> and does not affect your score. A hard pull only happens if you choose to accept an offer." },
+    { k: ["student", "refinance", "school"],
+      a: "Student loan refinance starts at <b>4.49% APR</b> for $1,000–$150,000 with 60–240 month terms. You can see the full grid on <a href=\"#/rates\">Rates &amp; terms</a>." },
+    { k: ["business", "company"],
+      a: "Business loans run <b>$5,000–$500,000</b> at rates from 7.49% APR, funded in 2–3 days. Select “Business” as your purpose when you <a href=\"#/apply\">apply</a>." },
+    { k: ["safe", "secure", "privacy", "data"],
+      a: "Your data is encrypted in transit and we never sell personal information. This is a demo build, so nothing you enter leaves your browser — it's stored locally on your device." },
+    { k: ["human", "agent", "support", "call", "phone", "contact"],
+      a: "A real person can help at <b>1-800-555-0142</b>, Monday–Friday 6am–6pm PT, or Saturday 7am–4pm PT." },
+    { k: ["hello", "hi", "hey", "help"],
+      a: "Happy to help! Ask me about <b>rates</b>, <b>how much you can borrow</b>, <b>funding speed</b>, <b>requirements</b> or <b>payments</b>." },
+    { k: ["demo", "bot", "real"],
+      a: "This is a <b>demo assistant</b> running entirely in your browser — no live agent, no API calls. The loan flow it points to is fully functional and stores your progress locally." }
+  ];
+
+  function botReply(text) {
+    var q = String(text || "").toLowerCase();
+    for (var i = 0; i < BOT.length; i++) {
+      for (var j = 0; j < BOT[i].k.length; j++) {
+        if (q.indexOf(BOT[i].k[j]) > -1) return BOT[i].a;
+      }
+    }
+    return "I can help with <b>rates</b>, <b>borrowing limits</b>, <b>requirements</b>, <b>funding times</b> and <b>payments</b>. Try one of the quick questions below, or <a href=\"#/apply\">check your rate</a> to see a real offer.";
+  }
+
+  function sendChat(text) {
+    var msg = String(text || "").trim();
+    if (!msg) return;
+    addMsg(msg, "user");
+    chatInput.value = "";
+    botSay(botReply(msg), 650);
+  }
+
+  if (chatFab) chatFab.addEventListener("click", function () { chatOpen(!chat.classList.contains("open")); });
+  if (chatClose) chatClose.addEventListener("click", function () { chatOpen(false); });
+  if (chatForm) chatForm.addEventListener("submit", function (e) { e.preventDefault(); sendChat(chatInput.value); });
+  if (chatQuick) $$("button", chatQuick).forEach(function (b) {
+    b.addEventListener("click", function () { sendChat(b.dataset.q); });
+  });
+  // Keep the assistant usable with the keyboard
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && chat && chat.classList.contains("open")) chatOpen(false);
+  });
+
+  /* ------------------------------ boot ------------------------------------ */
+  renderCalc();
+  render();
+  syncHeaderAuth();
+})();
+
+</script>
+</body>
+</html>
