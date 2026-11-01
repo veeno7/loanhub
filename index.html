@@ -520,6 +520,28 @@ table.data .strong { font-weight: 700; color: var(--ink); }
 .identity .who { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; color: var(--ink); }
 .identity button { border: 0; background: none; color: var(--link); font-weight: 700; font-size: .8rem; padding: 4px 6px; border-radius: 6px; }
 .identity button:hover { background: #e9f1f7; }
+.auth-tabs { display: flex; gap: 6px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px; padding: 5px; margin-bottom: 22px; }
+.auth-tab { flex: 1; border: 0; background: none; padding: 10px; border-radius: 8px; font: inherit; font-weight: 700; font-size: .9rem; color: var(--muted); cursor: pointer; transition: background .15s, color .15s, box-shadow .15s; }
+.auth-tab.active { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(16,35,26,.08); }
+.auth-pane { display: none; }
+.auth-pane.active { display: block; animation: fadein .25s ease both; }
+.btn-google { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid var(--line-strong); border-radius: 10px; padding: 12px; font: inherit; font-weight: 600; font-size: .92rem; color: var(--ink); cursor: pointer; transition: background .15s, box-shadow .15s; }
+.btn-google:hover { background: var(--bg-alt); box-shadow: 0 1px 3px rgba(16,35,26,.08); }
+.btn-google svg { flex: none; }
+.auth-fine { font-size: .74rem; color: var(--subtle); text-align: center; margin-top: 14px; line-height: 1.5; }
+.acct-menu { position: relative; }
+.acct-btn { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 13px 5px 6px; font: inherit; font-weight: 700; font-size: .84rem; color: var(--ink); cursor: pointer; }
+.acct-btn:hover { border-color: var(--line-strong); }
+.acct-btn .av { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--lime)); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: .76rem; }
+.acct-pop { position: absolute; right: 0; top: calc(100% + 8px); background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-lg); min-width: 220px; padding: 8px; display: none; z-index: 60; }
+.acct-pop.open { display: block; }
+.acct-pop .who { padding: 8px 10px 10px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.acct-pop .who b { display: block; font-size: .9rem; color: var(--ink); }
+.acct-pop .who span { font-size: .78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.acct-pop a, .acct-pop button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 9px 10px; border-radius: 8px; font: inherit; font-size: .86rem; color: var(--body); font-weight: 600; cursor: pointer; }
+.acct-pop a:hover, .acct-pop button:hover { background: var(--bg-alt); text-decoration: none; }
+.acct-pop .sep { height: 1px; background: var(--line); margin: 6px 0; }
+.acct-pop button#acctSignOut { color: var(--danger, #c0392b); }
 
 /* -------------------------------- Footer -------------------------------- */
 .site-footer { background: #0a1c12; color: rgba(255,255,255,.66); padding: 52px 0 26px; font-size: .88rem; }
@@ -711,6 +733,16 @@ table.data .strong { font-weight: 700; color: var(--ink); }
         1-800-555-0142
       </span>
       <a class="btn btn-ghost btn-sm" href="#/login" id="headerAuth">Sign in</a>
+      <div class="acct-menu" id="acctMenu" hidden>
+        <button class="acct-btn" id="acctBtn" aria-haspopup="true" aria-expanded="false"><span class="av" id="acctAv">A</span><span id="acctName">Account</span></button>
+        <div class="acct-pop" id="acctPop" role="menu">
+          <div class="who"><b id="acctPopName">—</b><span id="acctPopEmail">—</span></div>
+          <a href="#/dashboard" role="menuitem">My dashboard</a>
+          <a href="#/apply" role="menuitem">Apply for a loan</a>
+          <div class="sep"></div>
+          <button id="acctSignOut" role="menuitem">Sign out</button>
+        </div>
+      </div>
       <a class="btn btn-primary btn-sm" href="#/apply">Check my rate</a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -1372,8 +1404,8 @@ table.data .strong { font-weight: 700; color: var(--ink); }
 
       <div id="dashEmpty" class="empty-state" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
-        <h2 style="font-size:1.3rem">No active loan yet</h2>
-        <p>Check your rate in two minutes and see your personalized offer.</p>
+        <h2 id="dashEmptyTitle" style="font-size:1.3rem">Welcome to LoanHub</h2>
+        <p id="dashEmptyMsg">You're signed in. Check your rate in two minutes to open a loan — your balance, schedule and payments will appear here.</p>
         <a class="btn btn-primary" href="#/apply" style="margin-top:8px">Check my rate</a>
       </div>
 
@@ -1465,36 +1497,65 @@ table.data .strong { font-weight: 700; color: var(--ink); }
 <section class="route" id="route-login" hidden>
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="auth-step active" id="authStepEmail">
-        <h1>Sign in to LoanHub</h1>
-        <p class="auth-sub">Manage your loan, payments and schedule.</p>
-        <div class="field" id="authEmailField">
-          <label for="authEmail">Email address</label>
-          <input class="input" id="authEmail" type="email" autocomplete="username" placeholder="you@example.com" />
-          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a valid email address.</p>
-        </div>
-        <button class="btn btn-primary btn-block" id="authNext"><span class="spin"></span><span class="lbl">Continue</span></button>
-        <p class="auth-alt">New here? <a href="#/apply">Check your rate</a> — it creates your account.</p>
+      <h1 id="authHeading">Welcome to LoanHub</h1>
+      <p class="auth-sub">Sign in or create an account to manage your loan.</p>
+
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" id="tabSignin" role="tab" type="button">Sign in</button>
+        <button class="auth-tab" id="tabSignup" role="tab" type="button">Create account</button>
       </div>
 
-      <div class="auth-step" id="authStepPass">
-        <h1>Welcome back</h1>
-        <p class="auth-sub">Enter your password to continue.</p>
-        <div class="identity">
-          <span class="av" id="authAv">A</span>
-          <span class="who" id="authWho">you@example.com</span>
-          <button type="button" id="authEdit">Change</button>
+      <!-- SIGN IN -->
+      <div class="auth-pane active" id="paneSignin" role="tabpanel">
+        <button type="button" class="btn-google" id="googleSignin">
+          <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Continue with Google
+        </button>
+        <div class="divider">or</div>
+        <div class="field" id="siEmailField">
+          <label for="siEmail">Email address</label>
+          <input class="input" id="siEmail" type="email" autocomplete="username" placeholder="you@example.com" />
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a valid email address.</p>
         </div>
-        <div class="field" id="authPassField">
-          <label for="authPass">Password</label>
+        <div class="field" id="siPassField">
+          <label for="siPass">Password</label>
           <div class="input-wrap has-suffix">
-            <input class="input" id="authPass" type="password" autocomplete="current-password" placeholder="Enter your password" />
-            <button type="button" class="suffix" id="authToggle" style="border:0;background:none;font-weight:700;color:var(--green-dark);font-size:.8rem;padding:6px">Show</button>
+            <input class="input" id="siPass" type="password" autocomplete="current-password" placeholder="Your password" />
+            <button type="button" class="suffix" data-toggle="siPass" style="border:0;background:none;font-weight:700;color:var(--green-dark);font-size:.8rem;padding:6px">Show</button>
+          </div>
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your password.</p>
+        </div>
+        <button class="btn btn-primary btn-block" id="siSubmit"><span class="spin"></span><span class="lbl">Sign in</span></button>
+        <p class="auth-alt"><a href="#" id="siForgot">Forgot password?</a></p>
+      </div>
+
+      <!-- CREATE ACCOUNT -->
+      <div class="auth-pane" id="paneSignup" role="tabpanel">
+        <button type="button" class="btn-google" id="googleSignup">
+          <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign up with Google
+        </button>
+        <div class="divider">or</div>
+        <div class="field" id="suNameField">
+          <label for="suName">Full name</label>
+          <input class="input" id="suName" type="text" autocomplete="name" placeholder="Alex Johnson" />
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter your name.</p>
+        </div>
+        <div class="field" id="suEmailField">
+          <label for="suEmail">Email address</label>
+          <input class="input" id="suEmail" type="email" autocomplete="email" placeholder="you@example.com" />
+          <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Enter a valid email address.</p>
+        </div>
+        <div class="field" id="suPassField">
+          <label for="suPass">Create a password</label>
+          <div class="input-wrap has-suffix">
+            <input class="input" id="suPass" type="password" autocomplete="new-password" placeholder="At least 8 characters" />
+            <button type="button" class="suffix" data-toggle="suPass" style="border:0;background:none;font-weight:700;color:var(--green-dark);font-size:.8rem;padding:6px">Show</button>
           </div>
           <p class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>Password must be at least 8 characters.</p>
         </div>
-        <button class="btn btn-primary btn-block" id="authSignIn"><span class="spin"></span><span class="lbl">Sign in</span></button>
-        <p class="auth-alt"><a href="#" id="authForgot">Forgot password?</a></p>
+        <button class="btn btn-primary btn-block" id="suSubmit"><span class="spin"></span><span class="lbl">Create account</span></button>
+        <p class="auth-fine">This is a demonstration platform — your account is stored only in this browser and no real credit is extended.</p>
       </div>
     </div>
   </div>
@@ -1636,10 +1697,10 @@ table.data .strong { font-weight: 700; color: var(--ink); }
   function loadState() {
     try {
       var raw = localStorage.getItem(STORE);
-      if (!raw) return { draft: null, loan: null, session: null };
+      if (!raw) return { draft: null, loan: null, session: null, accounts: {} };
       var s = JSON.parse(raw);
-      return { draft: s.draft || null, loan: s.loan || null, session: s.session || null };
-    } catch (e) { return { draft: null, loan: null, session: null }; }
+      return { draft: s.draft || null, loan: s.loan || null, session: s.session || null, accounts: s.accounts || {} };
+    } catch (e) { return { draft: null, loan: null, session: null, accounts: {} }; }
   }
   function saveState() {
     try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* storage may be blocked */ }
@@ -2120,6 +2181,10 @@ table.data .strong { font-weight: 700; color: var(--ink); }
     };
     state.loan = loan;
     state.session = { email: draft.email, name: loan.borrower };
+    if (draft.email) {
+      var accs = state.accounts || (state.accounts = {});
+      if (!accs[draft.email]) accs[draft.email] = { name: loan.borrower, pass: null, viaApply: true };
+    }
     saveState();
 
     $("#fundedTitle").textContent = "You're all set, " + (draft.firstName || "friend") + ".";
@@ -2141,9 +2206,19 @@ table.data .strong { font-weight: 700; color: var(--ink); }
     var empty = $("#dashEmpty"), main = $("#dashMain");
     if (!empty || !main) return;
 
+    if (!(state.session && state.session.email)) {
+      empty.hidden = true;
+      main.hidden = true;
+      toast("Please sign in to view your dashboard.", "warn");
+      location.hash = "#/login";
+      return;
+    }
     if (!loan) {
       empty.hidden = false;
       main.hidden = true;
+      var fn0 = firstNameOf(state.session.name, state.session.email);
+      var et = $("#dashEmptyTitle");
+      if (et) et.textContent = "Hi, " + fn0;
       return;
     }
     empty.hidden = true;
@@ -2319,90 +2394,154 @@ table.data .strong { font-weight: 700; color: var(--ink); }
   if (modalBack) modalBack.addEventListener("click", function (e) { if (e.target === modalBack) closeModal(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
 
-  /* ================================ LOGIN ================================= */
-  var authStepEmail = $("#authStepEmail"), authStepPass = $("#authStepPass");
+  /* ================================ AUTH ================================= */
+  function accounts() { return state.accounts || (state.accounts = {}); }
+  function hashPass(s) { var h = 5381; for (var i = 0; i < s.length; i++) { h = ((h << 5) + h) + s.charCodeAt(i); h |= 0; } return "h" + (h >>> 0); }
+  function firstNameOf(n, email) { n = (n || "").trim(); if (n) return n.split(/\s+/)[0]; return (email || "there").split("@")[0]; }
+
+  var tabSignin = $("#tabSignin"), tabSignup = $("#tabSignup"),
+      paneSignin = $("#paneSignin"), paneSignup = $("#paneSignup");
+
+  function showAuthTab(which) {
+    var signup = which === "signup";
+    if (tabSignin) tabSignin.classList.toggle("active", !signup);
+    if (tabSignup) tabSignup.classList.toggle("active", signup);
+    if (paneSignin) paneSignin.classList.toggle("active", !signup);
+    if (paneSignup) paneSignup.classList.toggle("active", signup);
+  }
+  if (tabSignin) tabSignin.addEventListener("click", function () { showAuthTab("signin"); });
+  if (tabSignup) tabSignup.addEventListener("click", function () { showAuthTab("signup"); });
 
   function resetAuth() {
-    if (!authStepEmail) return;
-    authStepEmail.classList.add("active");
-    authStepPass.classList.remove("active");
-    $("#authEmailField").classList.remove("error");
-    $("#authPassField").classList.remove("error");
-    if (state.session && state.session.email && $("#authEmail")) $("#authEmail").value = state.session.email;
+    var hasAccts = Object.keys(accounts()).length > 0;
+    showAuthTab(hasAccts ? "signin" : "signup");
+    ["siEmailField", "siPassField", "suNameField", "suEmailField", "suPassField"].forEach(function (id) {
+      var el = $("#" + id); if (el) el.classList.remove("error");
+    });
+    if (state.session && state.session.email && $("#siEmail")) $("#siEmail").value = state.session.email;
   }
 
-  var authNext = $("#authNext");
-  if (authNext) authNext.addEventListener("click", function () {
-    var email = $("#authEmail").value.trim();
-    if (!isEmail(email)) {
-      $("#authEmailField").classList.add("error");
-      $("#authEmail").focus();
-      return;
-    }
-    $("#authEmailField").classList.remove("error");
-    authNext.classList.add("loading");
+  /* password show / hide (generic) */
+  $$("[data-toggle]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var inp = $("#" + btn.getAttribute("data-toggle")); if (!inp) return;
+      var showing = inp.type === "text";
+      inp.type = showing ? "password" : "text";
+      btn.textContent = showing ? "Show" : "Hide";
+    });
+  });
+
+  function doSignIn(email, name) {
+    state.session = { email: email, name: name };
+    saveState();
+    syncHeaderAuth();
+  }
+
+  /* Continue with Google (demonstration — no credentials collected) */
+  function googleDemo() {
+    var email = "demo.user@gmail.com", name = "Demo User";
+    var acc = accounts();
+    if (!acc[email]) acc[email] = { name: name, pass: null, google: true };
+    doSignIn(email, acc[email].name);
+    toast("Signed in with Google (demo).", "ok");
+    location.hash = "#/dashboard";
+  }
+  ["#googleSignin", "#googleSignup"].forEach(function (sel) {
+    var b = $(sel); if (b) b.addEventListener("click", googleDemo);
+  });
+
+  /* Create account */
+  var suSubmit = $("#suSubmit");
+  if (suSubmit) suSubmit.addEventListener("click", function () {
+    var name = $("#suName").value.trim(), email = $("#suEmail").value.trim(), pass = $("#suPass").value;
+    var ok = true;
+    if (!name) { $("#suNameField").classList.add("error"); ok = false; } else $("#suNameField").classList.remove("error");
+    if (!isEmail(email)) { $("#suEmailField").classList.add("error"); ok = false; } else $("#suEmailField").classList.remove("error");
+    if (pass.length < 8) { $("#suPassField").classList.add("error"); ok = false; } else $("#suPassField").classList.remove("error");
+    if (!ok) return;
+    var acc = accounts();
+    if (acc[email]) toast("That email already has an account — signing you in.", "warn");
+    acc[email] = { name: name, pass: hashPass(pass) };
+    suSubmit.classList.add("loading");
     setTimeout(function () {
-      authNext.classList.remove("loading");
-      $("#authWho").textContent = email;
-      $("#authAv").textContent = email.charAt(0).toUpperCase();
-      authStepEmail.classList.remove("active");
-      authStepPass.classList.add("active");
-      setTimeout(function () { $("#authPass").focus(); }, 120);
-    }, 500);
-  });
-
-  var authEdit = $("#authEdit");
-  if (authEdit) authEdit.addEventListener("click", function () {
-    authStepPass.classList.remove("active");
-    authStepEmail.classList.add("active");
-  });
-
-  var authToggle = $("#authToggle");
-  if (authToggle) authToggle.addEventListener("click", function () {
-    var p = $("#authPass");
-    var showing = p.type === "text";
-    p.type = showing ? "password" : "text";
-    authToggle.textContent = showing ? "Show" : "Hide";
-  });
-
-  var authSignIn = $("#authSignIn");
-  if (authSignIn) authSignIn.addEventListener("click", function () {
-    var pass = $("#authPass").value;
-    if (pass.length < 8) {
-      $("#authPassField").classList.add("error");
-      $("#authPass").focus();
-      return;
-    }
-    $("#authPassField").classList.remove("error");
-    authSignIn.classList.add("loading");
-    setTimeout(function () {
-      authSignIn.classList.remove("loading");
-      var email = $("#authWho").textContent;
-      state.session = { email: email, name: state.session ? state.session.name : email.split("@")[0] };
-      if (!state.loan) {
-        // create a sample loan so the dashboard has something to show after sign-in
-        toast("Signed in. Check your rate to open a loan.", "ok");
-        location.hash = "#/apply";
-        return;
-      }
-      saveState();
-      toast("Welcome back.", "ok");
+      suSubmit.classList.remove("loading");
+      doSignIn(email, name);
+      toast("Account created. Welcome, " + firstNameOf(name, email) + "!", "ok");
       location.hash = "#/dashboard";
     }, 700);
   });
 
-  var authForgot = $("#authForgot");
-  if (authForgot) authForgot.addEventListener("click", function (e) {
-    e.preventDefault();
-    toast("If an account exists for " + $("#authWho").textContent + ", a reset link is on its way.", "ok");
+  /* Sign in */
+  var siSubmit = $("#siSubmit");
+  if (siSubmit) siSubmit.addEventListener("click", function () {
+    var email = $("#siEmail").value.trim(), pass = $("#siPass").value;
+    var ok = true;
+    if (!isEmail(email)) { $("#siEmailField").classList.add("error"); ok = false; } else $("#siEmailField").classList.remove("error");
+    if (!pass) { $("#siPassField").classList.add("error"); ok = false; } else $("#siPassField").classList.remove("error");
+    if (!ok) return;
+    var rec = accounts()[email];
+    if (!rec) {
+      toast("No account found for that email. Create one below.", "warn");
+      if ($("#suEmail")) $("#suEmail").value = email;
+      showAuthTab("signup");
+      setTimeout(function () { if ($("#suName")) $("#suName").focus(); }, 120);
+      return;
+    }
+    if (rec.pass !== null && rec.pass !== hashPass(pass)) {
+      $("#siPassField").classList.add("error");
+      $("#siPass").focus();
+      toast("Incorrect password.", "warn");
+      return;
+    }
+    siSubmit.classList.add("loading");
+    setTimeout(function () {
+      siSubmit.classList.remove("loading");
+      doSignIn(email, rec.name);
+      toast("Welcome back, " + firstNameOf(rec.name, email) + "!", "ok");
+      location.hash = "#/dashboard";
+    }, 600);
   });
 
-  /* header auth label */
+  var siForgot = $("#siForgot");
+  if (siForgot) siForgot.addEventListener("click", function (e) {
+    e.preventDefault();
+    var em = ($("#siEmail").value || "").trim();
+    toast("If an account exists for " + (em || "that email") + ", a reset link is on its way.", "ok");
+  });
+
+  /* header account menu */
+  function signOut() {
+    state.session = null;
+    saveState();
+    syncHeaderAuth();
+    var pop = $("#acctPop"); if (pop) pop.classList.remove("open");
+    toast("Signed out.", "ok");
+    location.hash = "#/home";
+  }
+  var acctBtn = $("#acctBtn"), acctPop = $("#acctPop");
+  if (acctBtn) acctBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (acctPop) {
+      var open = acctPop.classList.toggle("open");
+      acctBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+  });
+  document.addEventListener("click", function () { if (acctPop) { acctPop.classList.remove("open"); if (acctBtn) acctBtn.setAttribute("aria-expanded", "false"); } });
+  var acctSignOut = $("#acctSignOut"); if (acctSignOut) acctSignOut.addEventListener("click", signOut);
+
   function syncHeaderAuth() {
-    var el = $("#headerAuth");
-    if (!el) return;
-    el.textContent = state.loan ? "My loan" : "Sign in";
-    el.setAttribute("href", state.loan ? "#/dashboard" : "#/login");
+    var signed = !!(state.session && state.session.email);
+    var authLink = $("#headerAuth"), menu = $("#acctMenu");
+    if (authLink) authLink.hidden = signed;
+    if (menu) menu.hidden = !signed;
+    if (signed) {
+      var nm = state.session.name || state.session.email;
+      var set = function (id, v) { var el = $(id); if (el) el.textContent = v; };
+      set("#acctName", firstNameOf(nm, state.session.email));
+      set("#acctAv", (nm || state.session.email).charAt(0).toUpperCase());
+      set("#acctPopName", nm);
+      set("#acctPopEmail", state.session.email);
+    }
   }
 
   /* ============================ DEMO ASSISTANT ============================ */
