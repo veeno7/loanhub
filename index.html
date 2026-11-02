@@ -2170,7 +2170,7 @@ table.data .strong { font-weight: 700; color: var(--ink); }
       apr: currentOffer.apr,
       term: draft.term,
       payment: currentOffer.payment,
-      start: start.toISOString().slice(0, 10),
+      start: start.getFullYear() + "-" + String(start.getMonth() + 1).padStart(2, "0") + "-" + String(start.getDate()).padStart(2, "0"),
       balance: draft.amount,
       original: draft.amount,
       purpose: draft.purpose,
@@ -2189,7 +2189,7 @@ table.data .strong { font-weight: 700; color: var(--ink); }
 
     $("#fundedTitle").textContent = "You're all set, " + (draft.firstName || "friend") + ".";
     $("#fundedId").textContent = loan.id;
-    $("#fundedFirst").textContent = dateLabel(addMonths(start, 1));
+    $("#fundedFirst").textContent = dateLabel(nextPaymentDate(loan));
     $("#fundedPayment").innerHTML = fmt(loan.payment) + "<small>/mo</small>";
     $("#offerWrap").hidden = true;
     $("#fundedWrap").hidden = false;
@@ -2343,7 +2343,7 @@ table.data .strong { font-weight: 700; color: var(--ink); }
       var input = $("#payAmount");
       if (chip.dataset.pay === "min") input.value = Math.min(loan.payment, loan.balance).toFixed(2);
       if (chip.dataset.pay === "double") input.value = Math.min(loan.payment * 2, loan.balance).toFixed(2);
-      if (chip.dataset.pay === "payoff") input.value = (loan.balance + loan.balance * loan.apr / 1200).toFixed(2);
+      if (chip.dataset.pay === "payoff") input.value = loan.balance.toFixed(2);
     });
   });
 
@@ -2351,8 +2351,8 @@ table.data .strong { font-weight: 700; color: var(--ink); }
     var loan = state.loan;
     var interest = loan.balance * (loan.apr / 100 / 12);
     var principal;
-    if (amount >= loan.balance) {
-      // Paying at least the remaining balance clears the loan in full.
+    if (amount >= loan.balance - 0.01) {
+      // Paying the remaining balance (within a cent) clears the loan in full.
       principal = loan.balance;
       interest = Math.max(0, amount - principal);
     } else {
@@ -2532,7 +2532,7 @@ table.data .strong { font-weight: 700; color: var(--ink); }
   function syncHeaderAuth() {
     var signed = !!(state.session && state.session.email);
     var authLink = $("#headerAuth"), menu = $("#acctMenu");
-    if (authLink) authLink.hidden = signed;
+    if (authLink) { authLink.hidden = signed; authLink.style.display = signed ? "none" : ""; }
     if (menu) menu.hidden = !signed;
     if (signed) {
       var nm = state.session.name || state.session.email;
